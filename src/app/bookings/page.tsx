@@ -2,9 +2,8 @@ import { redirect } from 'next/navigation'
 import { getServerSession } from 'next-auth'
 
 import { BookingItem } from '@/components/booking-item'
+import { authOptions } from '@/lib/auth'
 import { db } from '@/lib/prisma'
-
-import { authOptions } from '../api/auth/[...nextauth]/route'
 
 export const metadata = {
   title: 'Agendamentos',

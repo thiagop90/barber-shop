@@ -6,9 +6,8 @@ import { BarberShopItem } from '@/components/barbershop-item'
 import { BookingItem } from '@/components/booking-item'
 import { Search } from '@/components/search'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+import { authOptions } from '@/lib/auth'
 import { db } from '@/lib/prisma'
-
-import { authOptions } from '../api/auth/[...nextauth]/route'
 
 export default async function Home() {
   const session = await getServerSession(authOptions)
