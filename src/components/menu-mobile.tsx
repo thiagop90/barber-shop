@@ -1,30 +1,21 @@
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from './ui/sheet'
-import { Button } from './ui/button'
-import { Menu } from 'lucide-react'
+import { User } from 'lucide-react'
+
 import { StatusAuthenticated } from './status-authenticated'
+import { Button } from './ui/button'
+import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
 
 export function MenuMobile() {
   return (
-    <Sheet>
-      <SheetTrigger asChild>
+    <Popover>
+      <PopoverTrigger asChild>
         <Button variant="outline" size="icon">
-          <Menu className="h-5 w-5" />
+          <User className="h-5 w-5" />
         </Button>
-      </SheetTrigger>
+      </PopoverTrigger>
 
-      <SheetContent className="p-0">
-        <SheetHeader className="border-b p-5 text-left">
-          <SheetTitle>Menu</SheetTitle>
-        </SheetHeader>
-
+      <PopoverContent className="mr-5">
         <StatusAuthenticated />
-      </SheetContent>
-    </Sheet>
+      </PopoverContent>
+    </Popover>
   )
 }

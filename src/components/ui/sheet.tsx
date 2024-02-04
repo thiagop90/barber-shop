@@ -1,9 +1,9 @@
 'use client'
 
-import * as React from 'react'
 import * as SheetPrimitive from '@radix-ui/react-dialog'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { X } from 'lucide-react'
+import * as React from 'react'
 
 import { cn } from '@/lib/utils'
 
@@ -40,7 +40,7 @@ const sheetVariants = cva(
           'inset-x-0 bottom-0 border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom',
         left: 'inset-y-0 left-0 h-full w-3/4 border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left sm:max-w-sm',
         right:
-          'inset-y-0 right-0 h-full w-3/4  border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right sm:max-w-sm',
+          'inset-y-0 right-0 h-full w-[90%] border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right max-w-sm',
       },
     },
     defaultVariants: {
@@ -92,13 +92,7 @@ const SheetFooter = ({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div
-    className={cn(
-      'flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2',
-      className,
-    )}
-    {...props}
-  />
+  <div className={cn('flex flex-col-reverse', className)} {...props} />
 )
 SheetFooter.displayName = 'SheetFooter'
 

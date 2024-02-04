@@ -1,7 +1,9 @@
-import { Button } from '@/components/ui/button'
 import { BarberShop } from '@prisma/client'
 import { MapPin, Menu, Star } from 'lucide-react'
 import Image from 'next/image'
+
+import { Button } from '@/components/ui/button'
+
 import { ButtonBack } from './button-back'
 
 interface BarberShopInfoProps {
@@ -13,14 +15,6 @@ export function BarberShopInfo({ barberShop }: BarberShopInfoProps) {
     <div>
       <div className="relative h-[250px] w-full">
         <ButtonBack />
-
-        <Button
-          variant="outline"
-          size="icon"
-          className="absolute right-5 top-5 z-50"
-        >
-          <Menu className="h-5 w-5" />
-        </Button>
 
         <Image
           alt={barberShop.name}
