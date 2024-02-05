@@ -1,20 +1,24 @@
 import './globals.css'
 
 import type { Metadata } from 'next'
-import { Nunito } from 'next/font/google'
+import { Inter } from 'next/font/google'
 
 import { Header } from '@/components/header'
 import { Toaster } from '@/components/ui/sonner'
+import { cn } from '@/lib/utils'
 
 import AuthProvider from '../providers/auth'
 
-const nunito = Nunito({ subsets: ['latin'] })
+const nunito = Inter({
+  subsets: ['latin'],
+})
 
 export const metadata: Metadata = {
   title: {
     default: 'BarberShop',
     template: '%s | BarberShop',
   },
+  viewport: { width: 'device-width', initialScale: 1, maximumScale: 1 },
 }
 
 export default function RootLayout({
@@ -24,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${nunito.className} dark`}>
+      <body className={cn('dark', nunito.className)}>
         <AuthProvider>
           <Header />
           {children}

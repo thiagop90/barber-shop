@@ -4,7 +4,7 @@ import { StatusAuthenticated } from './status-authenticated'
 import { Button } from './ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
 
-export function MenuMobile() {
+export function AccountMenu() {
   return (
     <Popover>
       <PopoverTrigger asChild>

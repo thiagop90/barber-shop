@@ -77,7 +77,7 @@ export function BookingItem({ className, booking }: BookingItemProps) {
               <StatusBadge isBookingConfirmed={isBookingConfirmed} />
 
               <div className="space-y-2">
-                <h2 className="font-bold">{booking.service.name}</h2>
+                <h2 className="font-semibold">{booking.service.name}</h2>
 
                 <div className="flex items-center gap-2">
                   <Avatar className="h-6 w-6">

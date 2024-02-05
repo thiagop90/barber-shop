@@ -68,7 +68,7 @@ export default async function Home() {
                   />
                 ))}
               </div>
-              <ScrollBar orientation="horizontal" />
+              <ScrollBar className="px-5" orientation="horizontal" />
             </ScrollArea>
           </>
         )}
@@ -82,10 +82,14 @@ export default async function Home() {
         <ScrollArea className="-mx-5">
           <div className="mb-4 flex gap-4 px-5">
             {barberShops.map((barberShop) => (
-              <BarberShopItem key={barberShop.id} barberShop={barberShop} />
+              <BarberShopItem
+                className="min-w-[200px] max-w-[200px]"
+                key={barberShop.id}
+                barberShop={barberShop}
+              />
             ))}
           </div>
-          <ScrollBar orientation="horizontal" />
+          <ScrollBar className="px-5" orientation="horizontal" />
         </ScrollArea>
       </div>
     </div>
