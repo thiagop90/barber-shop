@@ -3,20 +3,17 @@ import { Star } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { cn } from '@/lib/utils'
-
 import { Badge } from './ui/badge'
 import { Button } from './ui/button'
 import { Card, CardContent } from './ui/card'
 
 interface BarberShopItemProps {
   barberShop: BarberShop
-  className?: string
 }
 
-export function BarberShopItem({ className, barberShop }: BarberShopItemProps) {
+export function BarberShopItem({ barberShop }: BarberShopItemProps) {
   return (
-    <Card className={cn('h-full w-full', className)}>
+    <Card className="h-full w-full">
       <CardContent className="space-y-1.5 p-1.5">
         <div className="relative overflow-hidden rounded-sm border">
           <Badge className="absolute left-2 top-2 z-50 gap-1 bg-card/75 backdrop-blur-sm hover:bg-card/75">

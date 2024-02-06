@@ -17,7 +17,7 @@ export function DynamicTag({ href, children }: FilterItemProps) {
 
   return (
     <DynamicTag
-      className={cn('hover:underline hover:underline-offset-4', {
+      className={cn('font-medium hover:underline hover:underline-offset-4', {
         'text-primary underline underline-offset-4': active,
       })}
       href={href}

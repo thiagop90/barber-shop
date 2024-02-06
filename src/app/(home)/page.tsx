@@ -6,9 +6,15 @@ import { getServerSession } from 'next-auth'
 import { BarberShopItem } from '@/components/barbershop-item'
 import { BookingItem } from '@/components/booking-item'
 import { Search } from '@/components/search'
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from '@/components/ui/carousel'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { authOptions } from '@/lib/auth'
 import { db } from '@/lib/prisma'
+import { cn } from '@/lib/utils'
 
 export default async function Home() {
   const session = await getServerSession(authOptions)
@@ -62,18 +68,25 @@ export default async function Home() {
               Agendamentos
             </h3>
 
-            <ScrollArea className="-mx-5">
-              <div className="mb-4 flex gap-4 px-5">
+            <Carousel
+              opts={{
+                align: 'start',
+              }}
+              className="-mx-5"
+            >
+              <CarouselContent>
                 {confirmedBookings.map((booking) => (
-                  <BookingItem
-                    className="w-full min-w-[340px]"
+                  <CarouselItem
                     key={booking.id}
-                    booking={booking}
-                  />
+                    className={cn(
+                      confirmedBookings.length > 1 && 'max-w-[340px]',
+                    )}
+                  >
+                    <BookingItem booking={booking} />
+                  </CarouselItem>
                 ))}
-              </div>
-              <ScrollBar className="px-5" orientation="horizontal" />
-            </ScrollArea>
+              </CarouselContent>
+            </Carousel>
           </>
         )}
       </div>
@@ -83,18 +96,20 @@ export default async function Home() {
           Recomendados
         </h3>
 
-        <ScrollArea className="-mx-5">
-          <div className="mb-4 flex gap-4 px-5">
+        <Carousel
+          opts={{
+            align: 'start',
+          }}
+          className="-mx-5"
+        >
+          <CarouselContent>
             {barberShops.map((barberShop) => (
-              <BarberShopItem
-                className="min-w-[200px] max-w-[200px]"
-                key={barberShop.id}
-                barberShop={barberShop}
-              />
+              <CarouselItem key={barberShop.id} className="max-w-[220px]">
+                <BarberShopItem barberShop={barberShop} />
+              </CarouselItem>
             ))}
-          </div>
-          <ScrollBar className="px-5" orientation="horizontal" />
-        </ScrollArea>
+          </CarouselContent>
+        </Carousel>
       </div>
     </div>
   )
