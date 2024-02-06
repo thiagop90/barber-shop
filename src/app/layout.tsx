@@ -1,6 +1,5 @@
 import './globals.css'
 
-import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
 import { Header } from '@/components/header'
@@ -9,11 +8,11 @@ import { cn } from '@/lib/utils'
 
 import AuthProvider from '../providers/auth'
 
-const nunito = Inter({
+const inter = Inter({
   subsets: ['latin'],
 })
 
-export const metadata: Metadata = {
+export const metadata = {
   title: {
     default: 'BarberShop',
     template: '%s | BarberShop',
@@ -28,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn('dark', nunito.className)}>
+      <body className={cn('dark', inter.className)}>
         <AuthProvider>
           <Header />
           {children}

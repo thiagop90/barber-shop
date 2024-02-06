@@ -10,13 +10,13 @@ interface BarberShopsPageProps {
   }
 }
 
+export const metadata = {
+  title: 'Barbearias',
+}
+
 export default async function BarberShopsPage({
   searchParams,
 }: BarberShopsPageProps) {
-  if (!searchParams.search) {
-    redirect('/')
-  }
-
   const barberShops = await db.barberShop.findMany({
     where: {
       name: {
@@ -28,20 +28,26 @@ export default async function BarberShopsPage({
 
   return (
     <div className="space-y-5 px-5 py-6">
+      <h1 className="text-3xl font-bold tracking-tight">Barbearias</h1>
       <Search
         defaultValues={{
-          search: searchParams.search,
+          search: searchParams.search ?? '',
         }}
       />
 
-      <h1 className="text-xs font-bold uppercase text-gray-400">
-        Resultados para &quot;{searchParams.search}&quot;
-      </h1>
+      <div className="space-y-3">
+        {searchParams.search && (
+          <h3 className="text-xs font-bold uppercase text-muted-foreground">
+            Exibindo {barberShops.length} resultados para &quot;
+            {searchParams.search}&quot;
+          </h3>
+        )}
 
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-        {barberShops.map((barberShop) => (
-          <BarberShopItem key={barberShop.id} barberShop={barberShop} />
-        ))}
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          {barberShops.map((barberShop) => (
+            <BarberShopItem key={barberShop.id} barberShop={barberShop} />
+          ))}
+        </div>
       </div>
     </div>
   )

@@ -42,6 +42,7 @@ export function Search({ defaultValues }: SearchProps) {
               <FormControl>
                 <div className="relative flex items-center">
                   <Input
+                    type="search"
                     className="h-12 bg-card pl-10"
                     placeholder="Busque por uma barbearia..."
                     {...field}

@@ -1,5 +1,6 @@
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
+import { CalendarDays } from 'lucide-react'
 import { getServerSession } from 'next-auth'
 
 import { BarberShopItem } from '@/components/barbershop-item'
@@ -34,18 +35,21 @@ export default async function Home() {
   ])
 
   return (
-    <div className="space-y-8 p-5">
+    <div className="space-y-8 px-5 py-6">
       <div>
-        <div className="mb-6 space-y-0.5">
-          <h2 className="text-xl font-bold">
+        <div className="mb-6 space-y-2">
+          <h1 className="text-3xl font-bold tracking-tight">
             Olá,{' '}
             {session?.user ? session.user.name?.split(' ')[0] : 'Visitante'}!
-          </h2>
-          <p className="text-sm">
-            {format(new Date(), "EEEE, d 'de' MMMM", {
-              locale: ptBR,
-            })}
-          </p>
+          </h1>
+          <div className="flex items-center gap-2">
+            <CalendarDays className="h-4 w-4 text-primary" />
+            <p className="text-sm">
+              {format(new Date(), "EEEE, d 'de' MMMM", {
+                locale: ptBR,
+              })}
+            </p>
+          </div>
         </div>
 
         <Search />
@@ -54,7 +58,7 @@ export default async function Home() {
       <div>
         {confirmedBookings.length > 0 && (
           <>
-            <h3 className="mb-3 text-xs font-bold uppercase text-gray-400">
+            <h3 className="mb-3 text-xs font-bold uppercase text-muted-foreground">
               Agendamentos
             </h3>
 
@@ -75,7 +79,7 @@ export default async function Home() {
       </div>
 
       <div>
-        <h3 className="mb-3 text-xs font-bold uppercase text-gray-400">
+        <h3 className="mb-3 text-xs font-bold uppercase text-muted-foreground">
           Recomendados
         </h3>
 

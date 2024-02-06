@@ -1,7 +1,10 @@
+import { CalendarDays } from 'lucide-react'
+import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { getServerSession } from 'next-auth'
 
 import { BookingItem } from '@/components/booking-item'
+import { Button } from '@/components/ui/button'
 import { authOptions } from '@/lib/auth'
 import { db } from '@/lib/prisma'
 
@@ -47,34 +50,46 @@ export default async function BookingsPage() {
   ])
 
   return (
-    <div className="space-y-6 px-5 py-6">
-      <h1 className="text-xl font-bold">Agendamentos</h1>
+    <div className="space-y-5 px-5 py-6">
+      <h1 className="text-3xl font-bold tracking-tight">Agendamentos</h1>
 
-      <div className="space-y-3">
-        {confirmedBookings.length > 0 && (
-          <>
-            <h2 className="text-sm font-bold uppercase text-gray-400">
-              Confirmados
-            </h2>
+      {confirmedBookings.length > 0 && (
+        <div>
+          <h3 className="mb-2 text-sm font-semibold uppercase text-muted-foreground">
+            Confirmados
+          </h3>
+          <div className="space-y-4">
             {confirmedBookings.map((booking) => (
               <BookingItem key={booking.id} booking={booking} />
             ))}
-          </>
-        )}
-      </div>
+          </div>
+        </div>
+      )}
 
-      <div className="space-y-3">
-        {finishedBookings.length > 0 && (
-          <>
-            <h2 className="text-sm font-bold uppercase text-gray-400">
-              Finalizados
-            </h2>
+      {finishedBookings.length > 0 && (
+        <div>
+          <h3 className="mb-2 text-sm font-semibold uppercase text-muted-foreground">
+            Finalizados
+          </h3>
+          <div className="space-y-4">
             {finishedBookings.map((booking) => (
               <BookingItem key={booking.id} booking={booking} />
             ))}
-          </>
-        )}
-      </div>
+          </div>
+        </div>
+      )}
+
+      {confirmedBookings.length === 0 && finishedBookings.length === 0 && (
+        <div className="flex flex-col items-center justify-center gap-3 py-16">
+          <h1 className="">Nenhum agendamento realizado.</h1>
+          <Button asChild className="font-semibold">
+            <Link href="/barbershops">
+              <CalendarDays className="mr-2 h-5 w-5" />
+              Agende agora
+            </Link>
+          </Button>
+        </div>
+      )}
     </div>
   )
 }

@@ -113,7 +113,7 @@ export function SchedulingMenu({ barberShop, service }: SchedulingMenuProps) {
         />
 
         {date && (
-          <ScrollArea className="border-b py-6">
+          <ScrollArea className="border-b py-4">
             <DateTimeSelection
               date={date}
               selectedHour={selectedHour}

@@ -37,10 +37,12 @@ export function BarberShopItem({ className, barberShop }: BarberShopItemProps) {
 
         <div className="">
           <h2 className="truncate font-semibold">{barberShop.name}</h2>
-          <p className="truncate text-sm text-gray-400">{barberShop.address}</p>
+          <p className="truncate text-sm text-muted-foreground">
+            {barberShop.address}
+          </p>
 
           <Button asChild className="mt-3 w-full" variant="secondary">
-            <Link href={`/barbershops/${barberShop.id}`}>Reservar</Link>
+            <Link href={`/barbershops/${barberShop.id}`}>Agende agora</Link>
           </Button>
         </div>
       </CardContent>

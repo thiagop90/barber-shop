@@ -28,7 +28,9 @@ export function ServiceItem({ barberShop, service }: ServiceItemProps) {
         <div className="flex flex-col justify-between">
           <div>
             <h2 className="font-bold">{service.name}</h2>
-            <p className="text-sm text-gray-400">{service.description}</p>
+            <p className="text-sm text-muted-foreground">
+              {service.description}
+            </p>
           </div>
           <div className="flex items-center justify-between">
             <p className="text-sm font-bold text-primary">

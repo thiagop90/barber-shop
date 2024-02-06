@@ -30,7 +30,7 @@ export function ServiceDetailsContent({
 
         {date && (
           <div className="flex justify-between text-sm">
-            <h3 className="text-gray-400">Data</h3>
+            <h3 className="text-muted-foreground">Data</h3>
             <h3>
               {format(date, "dd 'de' MMMM", {
                 locale: ptBR,
@@ -41,13 +41,13 @@ export function ServiceDetailsContent({
 
         {selectedHour && (
           <div className="flex justify-between text-sm">
-            <h3 className="text-gray-400">Horário</h3>
+            <h3 className="text-muted-foreground">Horário</h3>
             <h3>{selectedHour}</h3>
           </div>
         )}
 
         <div className="flex justify-between text-sm">
-          <h3 className="text-gray-400">Barbearia</h3>
+          <h3 className="text-muted-foreground">Barbearia</h3>
           <h3>{barberShop.name}</h3>
         </div>
       </CardContent>

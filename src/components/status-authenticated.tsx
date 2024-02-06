@@ -78,7 +78,7 @@ export function StatusAuthenticated() {
             </Link>
           </Button>
           <Button
-            variant="outline"
+            variant="secondary"
             onClick={handleLogoutClick}
             className="w-full leading-normal text-red-400 hover:text-red-400"
           >
