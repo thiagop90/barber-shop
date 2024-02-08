@@ -1,5 +1,6 @@
 'use client'
 
+import { PopoverClose } from '@radix-ui/react-popover'
 import { Calendar, CalendarDays, LogOut, User } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -71,12 +72,14 @@ export function StatusAuthenticated() {
               </p>
             </div>
           </div>
-          <Button asChild variant="outline" className="w-full leading-normal">
-            <Link href="/bookings">
-              <CalendarDays className="mr-2 h-4 w-4" strokeWidth={1.75} />
-              Meus agendametos
-            </Link>
-          </Button>
+          <PopoverClose asChild>
+            <Button asChild variant="outline" className="w-full leading-normal">
+              <Link href="/bookings">
+                <CalendarDays className="mr-2 h-4 w-4" strokeWidth={1.75} />
+                Meus agendametos
+              </Link>
+            </Button>
+          </PopoverClose>
           <Button
             variant="secondary"
             onClick={handleLogoutClick}

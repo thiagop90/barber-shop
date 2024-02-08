@@ -28,7 +28,7 @@ export function BarberShopItem({ barberShop }: BarberShopItemProps) {
             width={0}
             height={0}
             sizes="100vw"
-            className="h-[180px] w-full  object-cover"
+            className="h-[180px] w-full object-cover"
           />
         </div>
 

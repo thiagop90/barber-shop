@@ -1,5 +1,6 @@
 import './globals.css'
 
+import { Viewport } from 'next'
 import { Inter } from 'next/font/google'
 
 import { Header } from '@/components/header'
@@ -17,7 +18,13 @@ export const metadata = {
     default: 'BarberShop',
     template: '%s | BarberShop',
   },
-  viewport: { width: 'device-width', initialScale: 1, maximumScale: 1 },
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
 }
 
 export default function RootLayout({
