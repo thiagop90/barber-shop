@@ -1,5 +1,3 @@
-import { format } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
 import { CalendarDays } from 'lucide-react'
 import { DateTime } from 'luxon'
 import { getServerSession } from 'next-auth'
