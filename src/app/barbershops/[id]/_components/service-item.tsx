@@ -1,10 +1,9 @@
 import { BarberShop, Service } from '@prisma/client'
 import Image from 'next/image'
 
+import { SchedulingMenu } from '@/components/scheduling-menu/scheduling-menu'
 import { Card, CardContent } from '@/components/ui/card'
 import { formatCurrency } from '@/helpers/format-currency'
-
-import { SchedulingMenu } from './scheduling-menu/scheduling-menu'
 
 interface ServiceItemProps {
   barberShop: BarberShop

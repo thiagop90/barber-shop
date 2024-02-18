@@ -7,9 +7,10 @@ import { useState } from 'react'
 import { toast } from 'sonner'
 
 import { cancelBooking } from '@/actions/cancel-booking'
-import { ServiceDetailsContent } from '@/app/barbershops/[id]/_components/scheduling-menu/service-details-content'
 
 import { BookingItemCard } from './booking-item-card'
+import { SchedulingMenu } from './scheduling-menu/scheduling-menu'
+import { ServiceDetailsContent } from './scheduling-menu/service-details-content'
 import { StatusBadge } from './status-badge'
 import {
   AlertDialog,
@@ -93,21 +94,33 @@ export function BookingItemDialog({ booking }: BookingItemProps) {
           </Card>
 
           <ServiceDetailsContent
-            selectedHour={format(booking.date, 'hh:mm')}
+            selectedHour={format(booking.date, 'HH:mm')}
             date={booking.date}
             service={booking.service}
             barberShop={booking.barberShop}
           />
 
-          <DialogFooter className="flex-row gap-3">
-            <DialogClose asChild>
-              <Button
-                variant={isBookingConfirmed ? 'secondary' : 'default'}
-                className="w-full"
-              >
-                Fechar
-              </Button>
-            </DialogClose>
+          <DialogFooter className="gap-3">
+            {!isBookingConfirmed && (
+              <DialogClose asChild>
+                <Button
+                  variant={isBookingConfirmed ? 'secondary' : 'default'}
+                  className="w-full"
+                >
+                  Fechar
+                </Button>
+              </DialogClose>
+            )}
+
+            {isBookingConfirmed && (
+              <SchedulingMenu
+                barberShop={booking.barberShop}
+                service={booking.service}
+                date={booking.date}
+                selectedHour={format(booking.date, 'HH:mm')}
+                bookingId={booking.id}
+              />
+            )}
 
             <AlertDialog>
               <AlertDialogTrigger asChild>

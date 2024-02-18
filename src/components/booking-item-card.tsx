@@ -49,7 +49,7 @@ export function BookingItemCard({ booking }: BookingItemCardProps) {
               {format(booking.date, 'dd')}
             </h2>
             <span className="text-sm text-primary">
-              {format(booking.date, 'hh:mm')}
+              {format(booking.date, 'HH:mm')}
             </span>
           </div>
         </CardContent>

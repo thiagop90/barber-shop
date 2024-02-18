@@ -1,10 +1,9 @@
 import { BarberShop, Booking } from '@prisma/client'
 import { useEffect, useMemo, useState } from 'react'
 
+import { getDayBookings } from '@/actions/get-day-bookings'
 import { Button } from '@/components/ui/button'
-
-import { getDayBookings } from '../../_actions/get-day-bookings'
-import { generateDayTimeList } from '../../_helpers/hours'
+import { generateDayTimeList } from '@/helpers/hours'
 
 interface DateTimeSelectionProps {
   date: Date | undefined
@@ -40,7 +39,7 @@ export function DateTimeSelection({
       return []
     }
 
-    return generateDayTimeList(date).filter((time) => {
+    return generateDayTimeList(date).map((time) => {
       const timeHour = Number(time.split(':')[0])
       const timeMinutes = Number(time.split(':')[1])
 
@@ -51,22 +50,22 @@ export function DateTimeSelection({
         return bookingHour === timeHour && bookingMinutes === timeMinutes
       })
 
-      if (!booking) {
-        return true
+      return {
+        time,
+        disabled: !!booking,
       }
-
-      return false
     })
   }, [date, dayBookings])
 
   return (
     <div className="flex gap-3 px-5">
-      {timeList.map((time) => (
+      {timeList.map(({ time, disabled }) => (
         <Button
           variant={selectedHour === time ? 'default' : 'outline'}
           key={time}
           className="rounded-full"
           onClick={() => onSelectHour(time)}
+          disabled={disabled}
         >
           {time}
         </Button>

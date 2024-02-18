@@ -11,7 +11,7 @@ interface SaveBookinngParams {
   userId: string
 }
 
-export async function saveBooking(params: SaveBookinngParams) {
+export async function createBooking(params: SaveBookinngParams) {
   await db.booking.create({
     data: {
       date: params.date,
