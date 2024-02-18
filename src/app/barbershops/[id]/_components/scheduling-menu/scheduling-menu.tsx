@@ -98,7 +98,7 @@ export function SchedulingMenu({ barberShop, service }: SchedulingMenuProps) {
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="max-w-md gap-0 p-0">
+      <DialogContent className="gap-0 p-0">
         <DialogHeader className="border-b p-5 text-left">
           <DialogTitle>Fazer reserva</DialogTitle>
         </DialogHeader>

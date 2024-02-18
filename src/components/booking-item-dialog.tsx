@@ -68,11 +68,11 @@ export function BookingItemDialog({ booking }: BookingItemProps) {
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <BookingItemCard booking={booking} />
 
-      <DialogContent className="p-0">
-        <DialogHeader className="border-b px-4 py-5 text-left">
+      <DialogContent className="gap-0 p-0">
+        <DialogHeader className="border-b p-5 text-left">
           <DialogTitle>Informações da reserva</DialogTitle>
         </DialogHeader>
-        <div className="space-y-4 px-4 pb-4">
+        <div className="space-y-4 p-5">
           <Card>
             <CardContent className="flex items-center justify-between p-3">
               <div className="flex items-center gap-2 sm:gap-3">

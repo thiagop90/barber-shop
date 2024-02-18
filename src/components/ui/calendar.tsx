@@ -35,7 +35,7 @@ function Calendar({
         head_row: 'flex',
         head_cell:
           'text-muted-foreground w-full font-normal text-[0.8rem] capitalize',
-        row: 'flex w-full mt-2',
+        row: 'flex w-full mt-1.5 sm:mt-2',
         cell: 'h-10 w-full text-center text-sm p-0 relative focus-within:relative focus-within:z-20',
         day: cn(
           buttonVariants({ variant: 'ghost' }),

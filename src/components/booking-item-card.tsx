@@ -23,7 +23,7 @@ export function BookingItemCard({ booking }: BookingItemCardProps) {
     <DialogTrigger asChild>
       <Card className="cursor-pointer">
         <CardContent className="flex justify-between p-0">
-          <div className="space-y-3 p-4">
+          <div className="w-[70%] space-y-3 p-4">
             <StatusBadge isBookingConfirmed={isBookingConfirmed} />
 
             <div className="space-y-2">
@@ -39,7 +39,7 @@ export function BookingItemCard({ booking }: BookingItemCardProps) {
             </div>
           </div>
 
-          <div className="flex flex-col items-center justify-center gap-0.5 border-l px-4">
+          <div className="flex w-[30%] flex-col items-center justify-center gap-0.5 border-l">
             <p className="text-sm capitalize">
               {format(booking.date, 'MMMM', {
                 locale: ptBR,
