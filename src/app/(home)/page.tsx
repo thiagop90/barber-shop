@@ -3,7 +3,7 @@ import { DateTime } from 'luxon'
 import { getServerSession } from 'next-auth'
 
 import { BarberShopItem } from '@/components/barbershop-item'
-import { BookingItem } from '@/components/booking-item'
+import { BookingItemDialog } from '@/components/booking-item-dialog'
 import { Search } from '@/components/search'
 import {
   Carousel,
@@ -83,7 +83,7 @@ export default async function Home() {
                       confirmedBookings.length > 1 && 'max-w-[340px]',
                     )}
                   >
-                    <BookingItem booking={booking} />
+                    <BookingItemDialog booking={booking} />
                   </CarouselItem>
                 ))}
               </CarouselContent>

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { getServerSession } from 'next-auth'
 
-import { BookingItem } from '@/components/booking-item'
+import { BookingItemDialog } from '@/components/booking-item-dialog'
 import { Button } from '@/components/ui/button'
 import { authOptions } from '@/lib/auth'
 import { db } from '@/lib/prisma'
@@ -60,7 +60,7 @@ export default async function BookingsPage() {
           </h3>
           <div className="space-y-4">
             {confirmedBookings.map((booking) => (
-              <BookingItem key={booking.id} booking={booking} />
+              <BookingItemDialog key={booking.id} booking={booking} />
             ))}
           </div>
         </div>
@@ -73,7 +73,7 @@ export default async function BookingsPage() {
           </h3>
           <div className="space-y-4">
             {finishedBookings.map((booking) => (
-              <BookingItem key={booking.id} booking={booking} />
+              <BookingItemDialog key={booking.id} booking={booking} />
             ))}
           </div>
         </div>

@@ -16,7 +16,7 @@ export function Header() {
 
         <Separator orientation="vertical" className="h-6" />
 
-        <nav className="flex items-center gap-5 lg:space-x-6">
+        <nav className="flex items-center gap-5">
           <DynamicTag href="/">Início</DynamicTag>
           <DynamicTag href="/barbershops">Barbearias</DynamicTag>
         </nav>

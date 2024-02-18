@@ -1,6 +1,6 @@
-import { Badge } from './ui/badge'
+import { Badge, BadgeProps } from './ui/badge'
 
-interface StatusBadgeProps {
+interface StatusBadgeProps extends BadgeProps {
   isBookingConfirmed: boolean
 }
 

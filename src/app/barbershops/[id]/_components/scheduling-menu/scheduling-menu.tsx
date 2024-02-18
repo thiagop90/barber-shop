@@ -11,15 +11,15 @@ import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import { Card } from '@/components/ui/card'
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import {
-  Sheet,
-  SheetContent,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet'
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 
 import { saveBooking } from '../../_actions/save-booking'
 import { ConfirmationButton } from './confirmation-button'
@@ -91,17 +91,17 @@ export function SchedulingMenu({ barberShop, service }: SchedulingMenuProps) {
   }
 
   return (
-    <Sheet open={isOpen} onOpenChange={setIsOpen}>
-      <SheetTrigger asChild>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogTrigger asChild>
         <Button variant="secondary" disabled={!data?.user}>
           Reservar
         </Button>
-      </SheetTrigger>
+      </DialogTrigger>
 
-      <SheetContent className="p-0">
-        <SheetHeader className="border-b p-5 text-left">
-          <SheetTitle>Fazer reserva</SheetTitle>
-        </SheetHeader>
+      <DialogContent className="max-w-md gap-0 p-0">
+        <DialogHeader className="border-b p-5 text-left">
+          <DialogTitle>Fazer reserva</DialogTitle>
+        </DialogHeader>
 
         <Calendar
           mode="single"
@@ -124,23 +124,20 @@ export function SchedulingMenu({ barberShop, service }: SchedulingMenuProps) {
           </ScrollArea>
         )}
 
-        <div className="px-5 py-6">
+        <DialogFooter className="flex flex-col gap-4 p-5">
           <ServiceDetailsContent
             service={service}
             date={date}
             selectedHour={selectedHour}
             barberShop={barberShop}
           />
-        </div>
-
-        <SheetFooter className="px-5">
           <ConfirmationButton
             onClick={handleBookingSubmit}
             disabled={!selectedHour || !date || isLoading}
             isLoading={isLoading}
           />
-        </SheetFooter>
-      </SheetContent>
-    </Sheet>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   )
 }
