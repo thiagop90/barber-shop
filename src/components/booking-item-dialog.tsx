@@ -73,7 +73,8 @@ export function BookingItemDialog({ booking }: BookingItemProps) {
         <DialogHeader className="border-b p-5 text-left">
           <DialogTitle>Informações da reserva</DialogTitle>
         </DialogHeader>
-        <div className="space-y-4 p-5">
+
+        <div className="mt-5 space-y-4 px-5 transition-all">
           <Card>
             <CardContent className="flex items-center justify-between p-3">
               <div className="flex items-center gap-2 sm:gap-3">
@@ -99,70 +100,70 @@ export function BookingItemDialog({ booking }: BookingItemProps) {
             service={booking.service}
             barberShop={booking.barberShop}
           />
+        </div>
 
-          <DialogFooter className="gap-3">
-            {!isBookingConfirmed && (
-              <DialogClose asChild>
+        <DialogFooter className="gap-3 p-5">
+          {!isBookingConfirmed && (
+            <DialogClose asChild>
+              <Button
+                variant={isBookingConfirmed ? 'secondary' : 'default'}
+                className="w-full"
+              >
+                Fechar
+              </Button>
+            </DialogClose>
+          )}
+
+          {isBookingConfirmed && (
+            <SchedulingMenu
+              barberShop={booking.barberShop}
+              service={booking.service}
+              date={booking.date}
+              selectedHour={format(booking.date, 'HH:mm')}
+              bookingId={booking.id}
+            />
+          )}
+
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              {isBookingConfirmed && (
                 <Button
-                  variant={isBookingConfirmed ? 'secondary' : 'default'}
+                  disabled={isDeleteLoading}
+                  variant="destructive"
                   className="w-full"
                 >
-                  Fechar
+                  {isDeleteLoading ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Cancelando...
+                    </>
+                  ) : (
+                    'Cancelar reserva'
+                  )}
                 </Button>
-              </DialogClose>
-            )}
-
-            {isBookingConfirmed && (
-              <SchedulingMenu
-                barberShop={booking.barberShop}
-                service={booking.service}
-                date={booking.date}
-                selectedHour={format(booking.date, 'HH:mm')}
-                bookingId={booking.id}
-              />
-            )}
-
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
-                {isBookingConfirmed && (
-                  <Button
-                    disabled={isDeleteLoading}
-                    variant="destructive"
-                    className="w-full"
-                  >
-                    {isDeleteLoading ? (
-                      <>
-                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Cancelando...
-                      </>
-                    ) : (
-                      'Cancelar reserva'
-                    )}
-                  </Button>
-                )}
-              </AlertDialogTrigger>
-              <AlertDialogContent className="w-[90%]">
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Cancelar reserva</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    Tem certeza que deseja cancelar esse agendamento?
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter className="flex-row gap-3">
-                  <AlertDialogCancel className="mt-0 w-full">
-                    Voltar
-                  </AlertDialogCancel>
-                  <AlertDialogAction
-                    className="w-full"
-                    onClick={handleCancelClick}
-                  >
-                    Confirmar
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
-          </DialogFooter>
-        </div>
+              )}
+            </AlertDialogTrigger>
+            <AlertDialogContent className="w-[90%]">
+              <AlertDialogHeader>
+                <AlertDialogTitle>Cancelar reserva</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Tem certeza que deseja cancelar esse agendamento?
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter className="flex-row gap-3">
+                <AlertDialogCancel className="mt-0 w-full">
+                  Voltar
+                </AlertDialogCancel>
+                <AlertDialogAction
+                  className="w-full"
+                  onClick={handleCancelClick}
+                >
+                  Confirmar
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   )

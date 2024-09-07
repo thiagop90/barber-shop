@@ -1,5 +1,6 @@
+import { format } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 import { CalendarDays } from 'lucide-react'
-import { DateTime } from 'luxon'
 import { getServerSession } from 'next-auth'
 
 import { BarberShopItem } from '@/components/barbershop-item'
@@ -16,9 +17,6 @@ import { cn } from '@/lib/utils'
 
 export default async function Home() {
   const session = await getServerSession(authOptions)
-
-  const userTimeZone = 'America/Sao_Paulo'
-  DateTime.local().setZone(userTimeZone)
 
   const [barberShops, confirmedBookings] = await Promise.all([
     db.barberShop.findMany({}),
@@ -52,8 +50,8 @@ export default async function Home() {
           <div className="flex items-center gap-2">
             <CalendarDays className="h-4 w-4 text-primary" />
             <p className="text-sm">
-              {DateTime.local().toFormat("EEEE, d 'de' MMMM", {
-                locale: 'pt-BR',
+              {format(new Date(), "EEEE, d 'de' MMMM", {
+                locale: ptBR,
               })}
             </p>
           </div>

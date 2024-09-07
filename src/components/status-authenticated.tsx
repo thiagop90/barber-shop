@@ -6,6 +6,17 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { signIn, signOut, useSession } from 'next-auth/react'
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from './ui/alert-dialog'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Button } from './ui/button'
 import { Skeleton } from './ui/skeleton'
@@ -80,14 +91,33 @@ export function StatusAuthenticated() {
               </Link>
             </Button>
           </PopoverClose>
-          <Button
-            variant="secondary"
-            onClick={handleLogoutClick}
-            className="w-full leading-normal text-red-400 hover:text-red-400"
-          >
-            <LogOut className="mr-2 h-4 w-4" strokeWidth={1.75} />
-            Sair da conta
-          </Button>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button
+                variant="secondary"
+                className="w-full leading-normal text-red-400 hover:text-red-400"
+              >
+                <LogOut className="mr-2 h-4 w-4" strokeWidth={1.75} />
+                Sair da conta
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent className="w-[90%]">
+              <AlertDialogHeader>
+                <AlertDialogTitle>Sair da conta</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Tem certeza de que deseja sair da sua conta?
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancelar</AlertDialogCancel>
+
+                <AlertDialogAction onClick={handleLogoutClick}>
+                  Sair
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </>
       )}
 
