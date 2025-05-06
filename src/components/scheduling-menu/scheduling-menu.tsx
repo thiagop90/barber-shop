@@ -5,7 +5,7 @@ import { format, setHours, setMinutes } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { Loader2 } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { useSession } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
@@ -120,10 +120,14 @@ export function SchedulingMenu({
     }
   }
 
+  async function signInClick() {
+    await signIn('google')
+  }
+
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="w-full" variant="secondary">
+        <Button className="" variant="secondary">
           {bookingId ? 'Editar reserva' : 'Reservar'}
         </Button>
       </DialogTrigger>
@@ -163,7 +167,7 @@ export function SchedulingMenu({
           />
 
           <Button
-            onClick={handleBookingSubmit}
+            onClick={data?.user ? handleBookingSubmit : signInClick}
             disabled={!selectedHour || !date || isLoading || !changesMade}
           >
             {isLoading ? (

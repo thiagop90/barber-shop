@@ -46,7 +46,7 @@ export default async function BarberShopDetailsPage({
     <div>
       <BarberShopInfo barberShop={barberShop} />
 
-      <div className="space-y-3 px-5 py-6">
+      <div className="grid gap-3 px-5 py-6 md:grid-cols-2">
         {barberShop.services.map((service) => (
           <ServiceItem
             key={service.id}

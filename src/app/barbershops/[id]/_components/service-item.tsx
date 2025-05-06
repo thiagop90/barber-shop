@@ -24,10 +24,10 @@ export function ServiceItem({ barberShop, service }: ServiceItemProps) {
           className="rounded-lg object-contain"
         />
 
-        <div className="flex flex-col justify-between">
+        <div className="flex flex-1 flex-col justify-between">
           <div>
-            <h2 className="font-bold">{service.name}</h2>
-            <p className="text-sm text-muted-foreground">
+            <h2 className="font-semibold">{service.name}</h2>
+            <p className="text-xs text-muted-foreground">
               {service.description}
             </p>
           </div>

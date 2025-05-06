@@ -37,7 +37,7 @@ export default function RootLayout({
       <body className={cn('dark', inter.className)}>
         <AuthProvider>
           <Header />
-          {children}
+          <main className="mx-auto max-w-screen-md">{children}</main>
           <Toaster />
         </AuthProvider>
       </body>
