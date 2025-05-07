@@ -2,12 +2,12 @@ import './globals.css'
 
 import { Viewport } from 'next'
 import { Inter } from 'next/font/google'
+import { SessionProvider } from 'next-auth/react'
 
+import { auth } from '@/auth'
 import { Header } from '@/components/header'
 import { Toaster } from '@/components/ui/sonner'
 import { cn } from '@/lib/utils'
-
-import AuthProvider from '../providers/auth'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -27,19 +27,21 @@ export const viewport: Viewport = {
   userScalable: false,
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const session = await auth()
+
   return (
     <html lang="en">
-      <body className={cn('dark', inter.className)}>
-        <AuthProvider>
+      <body className={cn('px-5', inter.className)}>
+        <SessionProvider session={session}>
           <Header />
           <main className="mx-auto max-w-screen-md">{children}</main>
           <Toaster />
-        </AuthProvider>
+        </SessionProvider>
       </body>
     </html>
   )
