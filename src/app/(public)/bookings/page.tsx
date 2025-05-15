@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 
 import { auth } from '@/auth'
-import { BookingItemDialog } from '@/components/booking-item-dialog'
 import { Button } from '@/components/ui/button'
 import db from '@/lib/prisma'
 
@@ -52,7 +51,7 @@ export default async function BookingsPage() {
     <div className="space-y-5 px-5 py-6">
       <h1 className="text-3xl font-bold tracking-tight">Agendamentos</h1>
 
-      {confirmedBookings.length > 0 && (
+      {/* {confirmedBookings.length > 0 && (
         <div>
           <h3 className="mb-2 text-sm font-semibold uppercase text-muted-foreground">
             Confirmados
@@ -76,7 +75,7 @@ export default async function BookingsPage() {
             ))}
           </div>
         </div>
-      )}
+      )} */}
 
       {confirmedBookings.length === 0 && finishedBookings.length === 0 && (
         <div className="flex flex-col items-center justify-center gap-3 py-16">
