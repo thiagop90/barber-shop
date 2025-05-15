@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -8,47 +9,107 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
+enum UserRole {
+  ADMIN
+  USER
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String?
   email         String?   @unique
   emailVerified DateTime?
+  role          UserRole  @default(USER)
   image         String?
+  phone         String?
   accounts      Account[]
   sessions      Session[]
   bookings      Booking[]
+  reviews       Review[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("user")
+}
+
+model Barber {
+  id           String     @id @default(uuid())
+  name         String
+  barberShopId String
+  barberShop   BarberShop @relation(fields: [barberShopId], references: [id])
+  imageUrl     String?
+  bookings     Booking[]
+  reviews      Review[]
+
+  @@map("barber")
 }
 
 model BarberShop {
-  id       String    @id @default(uuid())
-  name     String
-  address  String
-  imageUrl String
-  services Service[]
-  bookings Booking[]
-  phones   String[]
+  id           String    @id @default(uuid())
+  name         String
+  slug         String    @unique
+  phone        String
+  address      String
+  imageUrl     String
+  openingHours Json?
+  services     Service[]
+  bookings     Booking[]
+  barbers      Barber[]
+  reviews      Review[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@map("barbershop")
+}
+
+model Review {
+  id               String     @id @default(uuid())
+  userId           String
+  barberShopId     String
+  barberId         String?
+  barberShopRating Int
+  barberRating     Int
+  comment          String?
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+  user             User       @relation(fields: [userId], references: [id])
+  barberShop       BarberShop @relation(fields: [barberShopId], references: [id])
+  barber           Barber?    @relation(fields: [barberId], references: [id])
+
+  @@index([barberShopId, createdAt])
+  @@map("review")
 }
 
 model Service {
   id           String     @id @default(uuid())
   name         String
-  price        Decimal    @db.Decimal(10, 2)
+  price        Int
+  duration     Int
   barberShopId String
   barberShop   BarberShop @relation(fields: [barberShopId], references: [id])
   description  String
   bookings     Booking[]
   imageUrl     String
+
+  @@map("service")
 }
 
 model Booking {
   id           String     @id @default(uuid())
   userId       String
-  user         User       @relation(fields: [userId], references: [id])
   serviceId    String
-  service      Service    @relation(fields: [serviceId], references: [id])
-  date         DateTime
   barberShopId String
+  barberId     String
+  date         DateTime
+  available    Boolean    @default(false)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  user         User       @relation(fields: [userId], references: [id])
+  service      Service    @relation(fields: [serviceId], references: [id])
   barberShop   BarberShop @relation(fields: [barberShopId], references: [id])
+  barber       Barber     @relation(fields: [barberId], references: [id])
+
+  @@map("booking")
 }
 
 model Account {
@@ -68,6 +129,7 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
+  @@map("account")
 }
 
 model Session {
@@ -76,6 +138,8 @@ model Session {
   userId       String
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("session")
 }
 
 model VerificationToken {
@@ -84,4 +148,5 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+  @@map("verification_token")
 }
