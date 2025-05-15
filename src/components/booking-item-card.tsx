@@ -1,6 +1,7 @@
-import { Prisma } from '@/generated/prisma'
 import { format, isFuture } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
+
+import { Prisma } from '@/generated/prisma'
 
 import { StatusBadge } from './status-badge'
 import { Avatar, AvatarImage } from './ui/avatar'

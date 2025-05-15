@@ -31,10 +31,10 @@ export async function AccountMenu() {
           <PopoverTrigger asChild>
             <Button
               variant="secondary"
-              className="border px-3 border-neutral-700/50"
+              className="border border-neutral-700/50 px-3"
             >
               <Avatar className="mr-3 size-6">
-                <AvatarFallback className="bg-neutral-200 bg-neutral-700">
+                <AvatarFallback className=" bg-neutral-700">
                   {user.name?.[0]}
                 </AvatarFallback>
                 <AvatarImage src={user?.image ?? ''} />
@@ -70,7 +70,7 @@ export async function AccountMenu() {
                 <AlertDialogTrigger asChild>
                   <Button
                     variant="outline"
-                    className="w-full  justify-between text-red-500 hover:text-red-500 text-red-400 hover:text-red-400"
+                    className="w-full  justify-between text-red-400 text-red-500 hover:text-red-400 hover:text-red-500"
                   >
                     Sair da conta
                     <LogOut className="h-4 w-4" strokeWidth={1.75} />
