@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 
-import { db } from '@/lib/prisma'
+import db from '@/lib/prisma'
 
 interface UpdateBookingParams {
   bookingId: string

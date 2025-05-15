@@ -1,26 +1,29 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
+import db from '@/lib/prisma'
 
-import { db } from '@/lib/prisma'
-
-interface SaveBookinngParams {
+interface CreateBookingParams {
   date: Date
   barberShopId: string
+  barberId: string
   serviceId: string
   userId: string
 }
 
-export async function createBooking(params: SaveBookinngParams) {
+export async function createBooking({
+  date,
+  barberId,
+  barberShopId,
+  serviceId,
+  userId,
+}: CreateBookingParams) {
   await db.booking.create({
     data: {
-      date: params.date,
-      barberShopId: params.barberShopId,
-      serviceId: params.serviceId,
-      userId: params.userId,
+      date,
+      barberShopId,
+      barberId,
+      serviceId,
+      userId,
     },
   })
-
-  revalidatePath('/')
-  revalidatePath('/bookings')
 }
