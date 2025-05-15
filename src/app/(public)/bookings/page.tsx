@@ -1,19 +1,18 @@
 import { CalendarDays } from 'lucide-react'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
-import { getServerSession } from 'next-auth'
 
+import { auth } from '@/auth'
 import { BookingItemDialog } from '@/components/booking-item-dialog'
 import { Button } from '@/components/ui/button'
-import { authOptions } from '@/lib/auth'
-import { db } from '@/lib/prisma'
+import db from '@/lib/prisma'
 
 export const metadata = {
   title: 'Agendamentos',
 }
 
 export default async function BookingsPage() {
-  const session = await getServerSession(authOptions)
+  const session = await auth()
 
   if (!session?.user) {
     redirect('/')

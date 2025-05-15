@@ -7,7 +7,10 @@ import { SessionProvider } from 'next-auth/react'
 import { auth } from '@/auth'
 import { Header } from '@/components/header'
 import { Toaster } from '@/components/ui/sonner'
+import { TooltipProvider } from '@/components/ui/tooltip'
 import { cn } from '@/lib/utils'
+
+import { QueryWrapper } from './query-wrapper'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -36,11 +39,17 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={cn('px-5', inter.className)}>
+      <body className={cn(inter.className)}>
         <SessionProvider session={session}>
-          <Header />
-          <main className="mx-auto max-w-screen-md">{children}</main>
-          <Toaster />
+          <QueryWrapper>
+            <TooltipProvider>
+              <main className="mx-auto min-h-dvh w-full max-w-screen-sm sm:border-x md:max-w-screen-md lg:max-w-screen-lg">
+                <Header />
+                {children}
+              </main>
+              <Toaster position="bottom-center" />
+            </TooltipProvider>
+          </QueryWrapper>
         </SessionProvider>
       </body>
     </html>

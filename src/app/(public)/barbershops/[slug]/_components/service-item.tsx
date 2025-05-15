@@ -1,27 +1,31 @@
-import { BarberShop, Service } from '@prisma/client'
 import Image from 'next/image'
 
-import { SchedulingMenu } from '@/components/scheduling-menu/scheduling-menu'
 import { Card, CardContent } from '@/components/ui/card'
+import type { Prisma, Service } from '@/generated/prisma'
 import { formatCurrency } from '@/helpers/format-currency'
 
+import { ScheduleDialog } from './schedule-dialog'
+
 interface ServiceItemProps {
-  barberShop: BarberShop
+  barberShop: Prisma.BarberShopGetPayload<{
+    include: { services: true; barbers: true }
+  }>
   service: Service
+  userId: string
 }
 
-export function ServiceItem({ barberShop, service }: ServiceItemProps) {
-  const servicePriceFormatted = formatCurrency(Number(service.price))
+export function ServiceItem({ barberShop, service, userId }: ServiceItemProps) {
+  const servicePriceFormatted = formatCurrency(service.price)
 
   return (
-    <Card>
-      <CardContent className="flex gap-4 p-3">
+    <Card className="h-auto">
+      <CardContent className="flex gap-4 p-2">
         <Image
           alt={service.name}
           src={service.imageUrl}
           width={110}
           height={110}
-          className="rounded-lg object-contain"
+          className="rounded-md border object-contain"
         />
 
         <div className="flex flex-1 flex-col justify-between">
@@ -36,7 +40,12 @@ export function ServiceItem({ barberShop, service }: ServiceItemProps) {
               {servicePriceFormatted}
             </p>
 
-            <SchedulingMenu barberShop={barberShop} service={service} />
+            <ScheduleDialog
+              barbers={barberShop.barbers}
+              barberShop={barberShop}
+              service={service}
+              userId={userId}
+            />
           </div>
         </div>
       </CardContent>

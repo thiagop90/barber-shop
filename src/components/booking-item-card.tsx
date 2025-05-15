@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client'
+import { Prisma } from '@/generated/prisma'
 import { format, isFuture } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 

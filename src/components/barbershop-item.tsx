@@ -1,45 +1,55 @@
-import { BarberShop } from '@prisma/client'
 import { Star } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+
+import type { Prisma } from '@/generated/prisma'
 
 import { Badge } from './ui/badge'
 import { Button } from './ui/button'
 import { Card, CardContent } from './ui/card'
 
 interface BarberShopItemProps {
-  barberShop: BarberShop
+  barbershop: Prisma.BarberShopGetPayload<{ include: { reviews: true } }>
 }
 
-export function BarberShopItem({ barberShop }: BarberShopItemProps) {
+export function BarberShopItem({ barbershop }: BarberShopItemProps) {
+  const averageRating =
+    barbershop.reviews.length > 0
+      ? barbershop.reviews.reduce(
+          (sum, review) => sum + review.barberShopRating,
+          0,
+        ) / barbershop.reviews.length
+      : 0
+
   return (
-    <Card className="h-full w-full">
-      <CardContent className="space-y-1.5 p-1.5">
-        <div className="relative overflow-hidden rounded-sm border">
-          <Badge className="absolute left-2 top-2 z-50 gap-1 bg-card/75 backdrop-blur-sm hover:bg-card/75">
-            <Star className="h-3 w-3 fill-primary text-primary" />
-            <span className="font-semibold leading-normal text-foreground">
-              5,0
-            </span>
-          </Badge>
+    <Card className="">
+      <CardContent className="relative grid h-full grid-cols-2 gap-3 p-2 min-[500px]:flex min-[500px]:flex-col">
+        <Badge className="absolute left-3 top-3 z-10 gap-1 bg-card/90 px-1.5 backdrop-blur-sm hover:bg-card/75">
+          <Star className="h-3 w-3 fill-primary text-primary" />
+          <span className="font-semibold leading-normal text-foreground">
+            {averageRating.toFixed(1)}({barbershop.reviews.length})
+          </span>
+        </Badge>
+        <div className="relative aspect-square overflow-hidden rounded-sm border">
           <Image
-            alt={barberShop.name}
-            src={barberShop.imageUrl}
-            width={0}
-            height={0}
+            fill
+            alt={barbershop.name}
+            src={barbershop.imageUrl}
             sizes="100vw"
-            className="h-[180px] w-full object-cover"
+            className=" object-cover"
           />
         </div>
 
-        <div className="">
-          <h2 className="truncate font-semibold">{barberShop.name}</h2>
-          <p className="truncate text-sm text-muted-foreground">
-            {barberShop.address}
-          </p>
+        <div className="flex flex-1 flex-col min-[500px]:gap-3">
+          <div className="flex-1 text-pretty">
+            <h2 className="font-semibold">{barbershop.name}</h2>
+            <p className="text-sm text-muted-foreground">
+              {barbershop.address}
+            </p>
+          </div>
 
-          <Button asChild className="mt-3 w-full" variant="secondary">
-            <Link href={`/barbershops/${barberShop.id}`}>Agende agora</Link>
+          <Button asChild className="w-full" variant="default">
+            <Link href={`/barbershops/${barbershop.slug}`}>Reserve agora</Link>
           </Button>
         </div>
       </CardContent>

@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-  .dark {
+  :root {
     --background: 20 14.3% 4.1%;
     --foreground: 60 9.1% 97.8%;
     --card: 24 9.8% 10%;
@@ -34,9 +34,5 @@
 
   body {
     @apply bg-background text-foreground antialiased min-h-dvh;
-  }
-
-  html {
-    @apply h-full
   }
 }
