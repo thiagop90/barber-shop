@@ -38,7 +38,7 @@ export function BarbershopTable({ barbershops }: BarbershopTableProps) {
               <TableRow key={shop.id}>
                 <TableCell className="font-medium">{shop.name}</TableCell>
                 <TableCell>{shop.address}</TableCell>
-                <TableCell>{shop.phones.join(', ')}</TableCell>
+                <TableCell>{shop.phone}</TableCell>
                 <TableCell>{shop.services.length}</TableCell>
                 <TableCell>{shop.barbers.length}</TableCell>
                 <TableCell>
