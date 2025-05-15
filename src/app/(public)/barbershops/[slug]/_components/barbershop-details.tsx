@@ -10,7 +10,7 @@ interface BarberShopDetailsProps {
 
 export function BarberShopDetails({ barberShop }: BarberShopDetailsProps) {
   return (
-    <div className="divide-y overflow-hidden">
+    <div className="divide-y overflow-hidden rounded-lg border bg-card/60">
       <CopyToClipboard text={barberShop.address} textTooltip="Copiar endereço">
         <Icons.mapPin />
         {barberShop.address}

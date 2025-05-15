@@ -50,8 +50,8 @@ export function BarberShopOpeningHours({
           <div className="space-y-2 px-4">
             {daysOrder.map((day) => (
               <div key={day} className="flex justify-between">
-                <span className="font-medium">{day}</span>
-                <span className="text-sm text-gray-600">
+                <span>{day}</span>
+                <span className="text-sm text-muted-foreground">
                   {hours[day]?.open && hours[day]?.close
                     ? `${hours[day].open}-${hours[day].close}`
                     : 'Fechado'}

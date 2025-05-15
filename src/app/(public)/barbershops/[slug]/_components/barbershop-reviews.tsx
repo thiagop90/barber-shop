@@ -19,7 +19,7 @@ export function BarberShopReview({ reviews }: BarberShopReviewProps) {
         <p className="text-gray-500">Nenhuma avaliação disponível.</p>
       ) : (
         reviews.map((review) => (
-          <div key={review.id} className="border-b p-4 last:border-b-0">
+          <div key={review.id} className="rounded-lg border bg-card p-4">
             <div className="mb-3 flex items-center gap-3">
               <Avatar className="size-8">
                 <AvatarFallback>

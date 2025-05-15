@@ -38,7 +38,7 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        'fixed left-[50%] top-[50%] z-50 flex max-h-dvh w-[90%] max-w-md translate-x-[-50%] translate-y-[-50%] flex-col gap-4 overflow-hidden rounded-lg border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:w-full',
+        'fixed left-[50%] top-[50%] z-50 flex max-h-dvh max-w-md translate-x-[-50%] translate-y-[-50%] flex-col gap-4 overflow-hidden rounded-lg border bg-background shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:w-full',
         className,
       )}
       {...props}
@@ -54,9 +54,15 @@ const DialogHeader = ({
   children,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn('relative flex text-left', className)} {...props}>
+  <div
+    className={cn(
+      'flex items-center justify-between border-b p-4 text-left',
+      className,
+    )}
+    {...props}
+  >
     {children}
-    <DialogPrimitive.Close className="group absolute right-5 top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-sm border bg-card disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+    <DialogPrimitive.Close className="group flex h-7 w-7 items-center justify-center rounded-sm border bg-card disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
       <X className="h-4 w-4 opacity-70 transition-opacity group-hover:opacity-100" />
       <span className="sr-only">Close</span>
     </DialogPrimitive.Close>

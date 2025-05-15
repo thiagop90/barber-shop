@@ -29,11 +29,9 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/drawer'
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { Separator } from '@/components/ui/separator'
 import type { Barber, BarberShop, Service } from '@/generated/prisma'
 import { useMediaQuery } from '@/lib/hooks/use-media-query'
-import { cn } from '@/lib/utils'
 
 import { AvailableTimes } from './available-times'
 import { BarberSelector } from './barber-selector'
@@ -100,7 +98,7 @@ export function ScheduleDialog({
 
   function SchedulingContent() {
     return (
-      <div>
+      <div className="overflow-y-auto">
         <Calendar
           selected={date}
           onSelect={(newDate) => {
@@ -109,12 +107,12 @@ export function ScheduleDialog({
               setSelectedTime(null)
             }
           }}
-          className="border-b px-5 pb-5 sm:pt-5"
+          className="border-b px-4 pb-4 sm:pt-4"
           locale={ptBR}
           disabled={(date) => isDayUnavailable(date)}
         />
 
-        <div className="space-y-5 p-5">
+        <div className="space-y-5 p-4">
           <BarberSelector
             barbers={barbers}
             selectedBarber={selectedBarber}
@@ -205,14 +203,14 @@ export function ScheduleDialog({
         <Button size="sm">Reservar</Button>
       </DialogTrigger>
 
-      <DialogContent className="gap-0 p-0">
-        <DialogHeader className="border-b p-5 text-left">
+      <DialogContent>
+        <DialogHeader>
           <DialogTitle>Fazer reserva</DialogTitle>
         </DialogHeader>
 
         <SchedulingContent />
 
-        <DialogFooter className="justify-between border-t p-5">
+        <DialogFooter className="justify-between border-t p-4">
           <DialogClose asChild>
             <Button variant="outline">Cancelar</Button>
           </DialogClose>

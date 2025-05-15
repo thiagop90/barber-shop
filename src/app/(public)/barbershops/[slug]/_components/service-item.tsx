@@ -1,9 +1,11 @@
 import Image from 'next/image'
 
+import { auth } from '@/auth'
 import { Card, CardContent } from '@/components/ui/card'
 import type { Prisma, Service } from '@/generated/prisma'
 import { formatCurrency } from '@/helpers/format-currency'
 
+import { AccessAccount } from './access-account'
 import { ScheduleDialog } from './schedule-dialog'
 
 interface ServiceItemProps {
@@ -11,10 +13,11 @@ interface ServiceItemProps {
     include: { services: true; barbers: true }
   }>
   service: Service
-  userId: string
 }
 
-export function ServiceItem({ barberShop, service, userId }: ServiceItemProps) {
+export async function ServiceItem({ barberShop, service }: ServiceItemProps) {
+  const session = await auth()
+  const userId = session?.user.id
   const servicePriceFormatted = formatCurrency(service.price)
 
   return (
@@ -40,12 +43,16 @@ export function ServiceItem({ barberShop, service, userId }: ServiceItemProps) {
               {servicePriceFormatted}
             </p>
 
-            <ScheduleDialog
-              barbers={barberShop.barbers}
-              barberShop={barberShop}
-              service={service}
-              userId={userId}
-            />
+            {userId ? (
+              <ScheduleDialog
+                barbers={barberShop.barbers}
+                barberShop={barberShop}
+                service={service}
+                userId={userId}
+              />
+            ) : (
+              <AccessAccount />
+            )}
           </div>
         </div>
       </CardContent>
