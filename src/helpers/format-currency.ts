@@ -1,5 +1,5 @@
 export const formatCurrency = (value: number): string => {
-  return Number(value).toLocaleString('pt-BR', {
+  return (value / 100).toLocaleString('pt-BR', {
     style: 'currency',
     currency: 'BRL',
   })
