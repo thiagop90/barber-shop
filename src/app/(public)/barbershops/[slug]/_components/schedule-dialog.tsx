@@ -102,7 +102,6 @@ export function ScheduleDialog({
     return (
       <div>
         <Calendar
-          mode="single"
           selected={date}
           onSelect={(newDate) => {
             if (newDate) {

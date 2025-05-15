@@ -11,12 +11,17 @@ import {
 import { ptBR } from 'date-fns/locale'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import * as React from 'react'
-import { DayPicker, Row, type RowProps } from 'react-day-picker'
+import {
+  DayPicker,
+  type DayPickerSingleProps,
+  Row,
+  type RowProps,
+} from 'react-day-picker'
 
 import { Button, buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
-export type CalendarProps = React.ComponentProps<typeof DayPicker>
+type CalendarProps = Omit<DayPickerSingleProps, 'mode'>
 
 function Calendar({
   className,
@@ -77,6 +82,7 @@ function Calendar({
       </div>
 
       <DayPicker
+        mode="single"
         month={weekBaseDate}
         selected={selected}
         showOutsideDays={showOutsideDays}
