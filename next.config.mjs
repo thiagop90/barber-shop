@@ -5,6 +5,12 @@ const nextConfig = {
       {
         hostname: 'utfs.io',
       },
+      {
+        hostname: 'barbershops.s3.us-east-2.amazonaws.com',
+      },
+      {
+        hostname: 'ui-avatars.com',
+      },
     ],
   },
 }
