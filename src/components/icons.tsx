@@ -30,6 +30,30 @@ export const Icons = {
   phone: ({ className, ...props }: LucideProps) => (
     <Phone className={cn('size-4 text-primary', className)} {...props} />
   ),
+  spinner: ({ className, ...props }: LucideProps) => (
+    <svg
+      className={cn('size-4 animate-spin', className)}
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <defs>
+        <linearGradient id="RadialGradient8932">
+          <stop offset="0%" stopColor="currentColor" stopOpacity="1" />
+          <stop offset="100%" stopColor="currentColor" stopOpacity="0.25" />
+        </linearGradient>
+      </defs>
+      <circle
+        cx="10"
+        cy="10"
+        r="8"
+        stroke="url(#RadialGradient8932)"
+        strokeWidth="2"
+        fill="none"
+      />
+    </svg>
+  ),
   facebook: ({ className, ...props }: LucideProps) => (
     <svg
       className={cn('size-5', className)}

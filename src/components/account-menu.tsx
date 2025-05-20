@@ -1,9 +1,10 @@
 import { CalendarDays, LogOut } from 'lucide-react'
 import Link from 'next/link'
 
-import { auth, signIn, signOut } from '@/auth'
+import { auth, signOut } from '@/auth'
 import { cn } from '@/lib/utils'
 
+import { AccessAccount } from './access-account'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -18,7 +19,6 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Button, buttonVariants } from './ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
-import { Skeleton } from './ui/skeleton'
 
 export async function AccountMenu() {
   const session = await auth()
@@ -105,16 +105,9 @@ export async function AccountMenu() {
           </PopoverContent>
         </Popover>
       ) : (
-        <form
-          action={async () => {
-            'use server'
-            await signIn('google')
-          }}
-        >
-          <Button variant="default" type="submit">
-            Entrar
-          </Button>
-        </form>
+        <AccessAccount>
+          <Button>Entrar</Button>
+        </AccessAccount>
       )}
     </>
   )

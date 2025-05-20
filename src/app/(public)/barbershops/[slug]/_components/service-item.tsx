@@ -1,11 +1,12 @@
 import Image from 'next/image'
 
 import { auth } from '@/auth'
+import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import type { Prisma, Service } from '@/generated/prisma'
 import { formatCurrency } from '@/helpers/format-currency'
 
-import { AccessAccount } from './access-account'
+import { AccessAccount } from '../../../../../components/access-account'
 import { ScheduleDialog } from './schedule-dialog'
 
 interface ServiceItemProps {
@@ -51,7 +52,9 @@ export async function ServiceItem({ barberShop, service }: ServiceItemProps) {
                 userId={userId}
               />
             ) : (
-              <AccessAccount />
+              <AccessAccount>
+                <Button size="sm">Reservar</Button>
+              </AccessAccount>
             )}
           </div>
         </div>

@@ -10,7 +10,6 @@ import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -24,7 +23,8 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer'
 import { useMediaQuery } from '@/lib/hooks/use-media-query'
-export function AccessAccount() {
+
+export function AccessAccount({ children }: { children: React.ReactNode }) {
   const isMobile = useMediaQuery('(max-width: 640px)')
   const [isDismissible, setIsDismissible] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
@@ -42,27 +42,23 @@ export function AccessAccount() {
         <Button
           variant="outline"
           onClick={() => handleSignIn('google')}
-          className="w-full gap-3 bg-card"
+          className="relative w-full gap-3 bg-card"
           disabled={isLoading}
         >
-          {isLoading ? (
-            <Loader2 className="size-4 animate-spin" />
-          ) : (
-            <Icons.google />
-          )}
+          <div className="absolute left-4 top-1/2 -translate-y-1/2">
+            {isLoading ? <Icons.spinner /> : <Icons.google />}
+          </div>
           Continuar com Google
         </Button>
         <Button
           variant="outline"
           onClick={() => handleSignIn('facebook')}
-          className="w-full gap-3 bg-card"
+          className="relative w-full gap-3 bg-card"
           disabled={isLoading}
         >
-          {isLoading ? (
-            <Loader2 className="size-4 animate-spin" />
-          ) : (
-            <Icons.facebook />
-          )}
+          <div className="absolute left-4 top-1/2 -translate-y-1/2">
+            {isLoading ? <Icons.spinner /> : <Icons.facebook />}
+          </div>
           Continuar com Facebook
         </Button>
       </div>
@@ -83,16 +79,11 @@ export function AccessAccount() {
         onOpenChange={handleOpenChange}
         direction="bottom"
       >
-        <DrawerTrigger asChild>
-          <Button size="sm">Reservar</Button>
-        </DrawerTrigger>
+        <DrawerTrigger asChild>{children}</DrawerTrigger>
 
         <DrawerContent>
           <DrawerHeader>
             <DrawerTitle>Acessar conta</DrawerTitle>
-            <DrawerDescription>
-              Para realizar uma reserva é necessário entrar em sua conta
-            </DrawerDescription>
           </DrawerHeader>
 
           <SignInButton />
@@ -103,9 +94,7 @@ export function AccessAccount() {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-      <DialogTrigger asChild>
-        <Button size="sm">Reservar</Button>
-      </DialogTrigger>
+      <DialogTrigger asChild>{children}</DialogTrigger>
 
       <DialogContent>
         <DialogHeader>
