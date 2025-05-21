@@ -3,6 +3,8 @@ import Link from 'next/link'
 
 import { AccountMenu } from './account-menu'
 import { DynamicTag } from './dynamic-tag'
+import LocaleSwitcherSelect from './locale-switch-select'
+import { LanguageSwitcher } from './locale-switcher'
 import { Separator } from './ui/separator'
 
 export function Header() {
@@ -23,7 +25,10 @@ export function Header() {
           <DynamicTag href="/barbershops">Barbearias</DynamicTag>
         </nav>
 
-        <AccountMenu />
+        <div className="flex gap-3">
+          <AccountMenu />
+          <LocaleSwitcherSelect />
+        </div>
       </div>
     </div>
   )

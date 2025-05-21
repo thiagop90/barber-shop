@@ -1,0 +1,8 @@
+{
+  "HomePage": {
+    "hello": "Hello, {name}!"
+  },
+    "propositions": {
+    "": ""
+  }
+}

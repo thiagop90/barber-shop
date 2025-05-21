@@ -51,16 +51,12 @@ export default async function BookingsPage() {
     <div className="space-y-5 px-5 py-6">
       <h1 className="text-3xl font-bold tracking-tight">Agendamentos</h1>
 
-      {/* {confirmedBookings.length > 0 && (
+      {confirmedBookings.length > 0 && (
         <div>
           <h3 className="mb-2 text-sm font-semibold uppercase text-muted-foreground">
             Confirmados
           </h3>
-          <div className="space-y-4">
-            {confirmedBookings.map((booking) => (
-              <BookingItemDialog key={booking.id} booking={booking} />
-            ))}
-          </div>
+          <div className="space-y-4">teste</div>
         </div>
       )}
 
@@ -69,13 +65,9 @@ export default async function BookingsPage() {
           <h3 className="mb-2 text-sm font-semibold uppercase text-muted-foreground">
             Finalizados
           </h3>
-          <div className="space-y-4">
-            {finishedBookings.map((booking) => (
-              <BookingItemDialog key={booking.id} booking={booking} />
-            ))}
-          </div>
+          <div className="space-y-4">teste</div>
         </div>
-      )} */}
+      )}
 
       {confirmedBookings.length === 0 && finishedBookings.length === 0 && (
         <div className="flex flex-col items-center justify-center gap-3 py-16">

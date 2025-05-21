@@ -2,15 +2,11 @@ import './globals.css'
 
 import { Viewport } from 'next'
 import { Inter } from 'next/font/google'
-import { SessionProvider } from 'next-auth/react'
 
-import { auth } from '@/auth'
 import { Header } from '@/components/header'
 import { Toaster } from '@/components/ui/sonner'
-import { TooltipProvider } from '@/components/ui/tooltip'
+import { Providers } from '@/lib/providers'
 import { cn } from '@/lib/utils'
-
-import { QueryWrapper } from './query-wrapper'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -32,25 +28,27 @@ export const viewport: Viewport = {
 
 export default async function RootLayout({
   children,
+  params: { locale },
 }: Readonly<{
   children: React.ReactNode
+  params: { locale: string }
 }>) {
-  const session = await auth()
-
   return (
-    <html lang="en">
+    <html lang={locale} suppressHydrationWarning>
       <body className={cn(inter.className)}>
-        <SessionProvider session={session}>
-          <QueryWrapper>
-            <TooltipProvider>
-              <main className="mx-auto min-h-dvh w-full max-w-screen-sm sm:border-x md:max-w-screen-md lg:max-w-screen-lg">
-                <Header />
-                {children}
-              </main>
-              <Toaster position="bottom-center" />
-            </TooltipProvider>
-          </QueryWrapper>
-        </SessionProvider>
+        <Providers>
+          <main className="mx-auto min-h-dvh w-full max-w-screen-sm sm:border-x md:max-w-screen-md lg:max-w-screen-lg">
+            <Header />
+            {children}
+          </main>
+          <Toaster
+            position="bottom-center"
+            toastOptions={{
+              className:
+                'p-4 bg-primary border-0 text-primary-foreground rounded-lg w-full max-h-[63px] shadow-inner',
+            }}
+          />
+        </Providers>
       </body>
     </html>
   )

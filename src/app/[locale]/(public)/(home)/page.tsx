@@ -1,6 +1,7 @@
 import { format } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
+import { enUS, ptBR } from 'date-fns/locale'
 import { CalendarDays } from 'lucide-react'
+import { getLocale, getTranslations } from 'next-intl/server'
 
 import { auth } from '@/auth'
 import { BarberShopItem } from '@/components/barbershop-item'
@@ -15,7 +16,9 @@ import db from '@/lib/prisma'
 import { cn } from '@/lib/utils'
 
 export default async function Home() {
-  const [session, barbershops] = await Promise.all([
+  const [t, locale, session, barbershops] = await Promise.all([
+    getTranslations('HomePage'),
+    getLocale(),
     auth(),
     db.barberShop.findMany({
       include: { reviews: true },
@@ -40,20 +43,28 @@ export default async function Home() {
       },
     }))
 
+  const ptLocale = locale === 'pt'
+  const enLocale = locale === 'en'
+
   return (
     <div className="space-y-8 px-5 py-8 sm:px-6">
       <div>
         <div className="mb-6 space-y-2">
           <h1 className="text-3xl font-bold tracking-tight">
-            Olá,{' '}
-            {session?.user ? session.user.name?.split(' ')[0] : 'Visitante'}!
+            {t('hello', {
+              name: session?.user.name?.split(' ')[0] ?? 'Visitante',
+            })}
           </h1>
           <div className="flex items-center gap-2">
             <Icons.calendar />
             <p className="text-sm">
-              {format(new Date(), "EEEE, d 'de' MMMM", {
-                locale: ptBR,
-              })}
+              {format(
+                new Date(),
+                ptLocale ? "EEEE, d 'de' MMMM" : 'EEEE, d MMMM',
+                {
+                  locale: enLocale ? enUS : ptBR,
+                },
+              )}
             </p>
           </div>
         </div>
