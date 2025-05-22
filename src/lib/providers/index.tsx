@@ -1,6 +1,5 @@
 import { SessionProvider } from 'next-auth/react'
 import { NextIntlClientProvider } from 'next-intl'
-import { getMessages } from 'next-intl/server'
 import { ThemeProvider } from 'next-themes'
 import type { ReactNode } from 'react'
 
@@ -10,13 +9,10 @@ import { TooltipProvider } from '@/components/ui/tooltip'
 import { QueryProvider } from './query-provider'
 
 export async function Providers({ children }: { children: ReactNode }) {
-  const [messages, session] = await Promise.all([
-    await getMessages(),
-    await auth(),
-  ])
+  const session = await auth()
 
   return (
-    <NextIntlClientProvider messages={messages}>
+    <NextIntlClientProvider>
       <SessionProvider session={session}>
         <ThemeProvider
           attribute="class"

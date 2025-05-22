@@ -1,4 +1,8 @@
 {
+  "Header": {
+    "home": "Início",
+    "barbershops": "Barbearias"
+  },
   "HomePage": {
     "hello": "Olá, {name}!"
   },

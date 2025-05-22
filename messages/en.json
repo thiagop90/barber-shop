@@ -1,4 +1,8 @@
 {
+  "Header": {
+    "home": "Home",
+    "barbershops": "Barbershops"
+  },
   "HomePage": {
     "hello": "Hello, {name}!"
   },
