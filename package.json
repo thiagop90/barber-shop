@@ -36,13 +36,13 @@
     "embla-carousel-react": "^8.0.0-rc22",
     "framer-motion": "^11.0.5",
     "lucide-react": "^0.317.0",
-    "next": "14.1.0",
+    "next": "^14.2.29",
     "next-auth": "^5.0.0-beta.27",
     "next-intl": "^4.1.0",
     "next-themes": "^0.4.6",
-    "react": "^18",
+    "react": "^18.3.1",
     "react-day-picker": "^8.10.0",
-    "react-dom": "^18",
+    "react-dom": "^18.3.1",
     "react-hook-form": "^7.50.0",
     "react-magic-motion": "^1.1.2",
     "sonner": "^1.4.0",
@@ -67,6 +67,6 @@
     "tailwindcss": "^3.3.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.4",
-    "typescript": "^5"
+    "typescript": "^5.8.3"
   }
 }
