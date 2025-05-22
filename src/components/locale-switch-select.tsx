@@ -21,7 +21,7 @@ const localeIcons: Record<Locale, JSX.Element> = {
   en: <Icons.euaFlag />,
 }
 
-export default function LocaleSwitcherSelect() {
+export function LocaleSwitcherSelect() {
   const locale = useLocale()
   const router = useRouter()
   const pathname = usePathname()
@@ -53,16 +53,11 @@ export default function LocaleSwitcherSelect() {
         sideOffset={4}
         className="[&_*[role=option]>span>svg]:shrink-0 [&_*[role=option]>span]:end-2 [&_*[role=option]>span]:start-auto [&_*[role=option]>span]:flex [&_*[role=option]>span]:items-center [&_*[role=option]>span]:gap-2 [&_*[role=option]]:pe-8 [&_*[role=option]]:ps-2"
       >
-        {routing.locales.map((locale) => (
-          <>
-            <SelectItem key={locale} value={locale}>
-              {localeIcons[locale as Locale]}
-              {locale === 'pt'
-                ? 'Português - Brasil'
-                : 'English - United States'}
-            </SelectItem>
-            <Separator className="my-1.5 last:hidden" />
-          </>
+        {routing.locales.map((locale, idx) => (
+          <SelectItem key={idx} value={locale}>
+            {localeIcons[locale as Locale]}
+            {locale === 'pt' ? 'Português - Brasil' : 'English - United States'}
+          </SelectItem>
         ))}
       </SelectContent>
     </Select>
