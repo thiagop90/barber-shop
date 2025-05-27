@@ -1,6 +1,7 @@
 import { Star } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 import type { Prisma } from '@/generated/prisma'
 
@@ -13,6 +14,7 @@ interface BarberShopItemProps {
 }
 
 export function BarberShopItem({ barbershop }: BarberShopItemProps) {
+  const t = useTranslations('BarberShopsPage')
   const averageRating =
     barbershop.reviews.length > 0
       ? barbershop.reviews.reduce(
@@ -49,7 +51,7 @@ export function BarberShopItem({ barbershop }: BarberShopItemProps) {
           </div>
 
           <Button asChild className="w-full" variant="default">
-            <Link href={`/barbershops/${barbershop.slug}`}>Reserve agora</Link>
+            <Link href={`/barbershops/${barbershop.slug}`}>{t('bookNow')}</Link>
           </Button>
         </div>
       </CardContent>

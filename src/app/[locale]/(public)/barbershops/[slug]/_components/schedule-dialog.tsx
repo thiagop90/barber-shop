@@ -170,7 +170,7 @@ export function ScheduleDialog({
         }}
       >
         <DrawerTrigger asChild>
-          <Button size="sm">{t('book')}</Button>
+          <Button size="sm">{t('schedule')}</Button>
         </DrawerTrigger>
         <DrawerContent className="max-h-dvh">
           <DrawerHeader>
@@ -205,7 +205,7 @@ export function ScheduleDialog({
       }}
     >
       <DialogTrigger asChild>
-        <Button size="sm">{t('book')}</Button>
+        <Button size="sm">{t('schedule')}</Button>
       </DialogTrigger>
 
       <DialogContent>

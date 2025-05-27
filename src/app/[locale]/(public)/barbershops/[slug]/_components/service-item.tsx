@@ -55,7 +55,7 @@ export async function ServiceItem({ barberShop, service }: ServiceItemProps) {
               />
             ) : (
               <AccessAccount>
-                <Button size="sm">{t('book')}</Button>
+                <Button size="sm">{t('schedule')}</Button>
               </AccessAccount>
             )}
           </div>

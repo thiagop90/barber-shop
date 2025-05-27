@@ -25,10 +25,11 @@
     "details": "Detalhes",
     "reviews": "Avaliações",
     "showing": "Exibindo",
-    "resultsFor": "resultados para"
+    "resultsFor": "resultados para",
+    "bookNow": "Reservar agora"
   },
   "ServiceItem": {
-    "book": "Reservar",
+    "schedule": "Agendar",
     "makeReservation": "Fazer reserva",
     "selectAProfessional": "Selecione um profissional",
     "warningCard": "Escolha um profissional para buscar os horários disponíveis para agendamento.",

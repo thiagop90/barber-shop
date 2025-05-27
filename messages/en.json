@@ -25,10 +25,11 @@
     "details": "Details",
     "reviews": "Reviews",
     "showing": "Showing",
-    "resultsFor": "results for"
+    "resultsFor": "results for",
+    "bookNow": "Book now"
   },
   "ServiceItem": {
-    "book": "Book",
+    "schedule": "Schedule",
     "makeReservation": "Make reservation",
     "selectAProfessional": "Select a professional",
     "warningCard": "Choose a professional to find available times for scheduling.",
