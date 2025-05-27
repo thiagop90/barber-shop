@@ -35,12 +35,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.7.0
- * Query Engine version: 3cff47a7f5d65c3ea74883f1d736e41d68ce91ed
+ * Prisma Client JS version: 6.8.2
+ * Query Engine version: 2060c79ba17c6bb9f5823312b6f6b7f4a845738e
  */
 Prisma.prismaVersion = {
-  client: "6.7.0",
-  engine: "3cff47a7f5d65c3ea74883f1d736e41d68ce91ed"
+  client: "6.8.2",
+  engine: "2060c79ba17c6bb9f5823312b6f6b7f4a845738e"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -259,8 +259,8 @@ const config = {
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../../../prisma",
-  "clientVersion": "6.7.0",
-  "engineVersion": "3cff47a7f5d65c3ea74883f1d736e41d68ce91ed",
+  "clientVersion": "6.8.2",
+  "engineVersion": "2060c79ba17c6bb9f5823312b6f6b7f4a845738e",
   "datasourceNames": [
     "db"
   ],
@@ -276,7 +276,7 @@ const config = {
   },
   "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"DATABASE_URL\")\n  directUrl = env(\"DIRECT_URL\")\n}\n\nenum UserRole {\n  ADMIN\n  USER\n}\n\nmodel User {\n  id            String    @id @default(cuid())\n  name          String?\n  email         String?   @unique\n  emailVerified DateTime?\n  role          UserRole  @default(USER)\n  image         String?\n  phone         String?\n  accounts      Account[]\n  sessions      Session[]\n  bookings      Booking[]\n  reviews       Review[]\n  createdAt     DateTime  @default(now())\n  updatedAt     DateTime  @updatedAt\n\n  @@map(\"user\")\n}\n\nmodel Barber {\n  id           String     @id @default(uuid())\n  name         String\n  barberShopId String\n  barberShop   BarberShop @relation(fields: [barberShopId], references: [id])\n  imageUrl     String?\n  bookings     Booking[]\n  reviews      Review[]\n\n  @@map(\"barber\")\n}\n\nmodel BarberShop {\n  id           String    @id @default(uuid())\n  name         String\n  slug         String    @unique\n  phone        String\n  address      String\n  imageUrl     String\n  openingHours Json?\n  services     Service[]\n  bookings     Booking[]\n  barbers      Barber[]\n  reviews      Review[]\n  createdAt    DateTime  @default(now())\n  updatedAt    DateTime  @updatedAt\n\n  @@map(\"barbershop\")\n}\n\nmodel Review {\n  id               String     @id @default(uuid())\n  userId           String\n  barberShopId     String\n  barberId         String?\n  barberShopRating Int\n  barberRating     Int\n  comment          String?\n  createdAt        DateTime   @default(now())\n  updatedAt        DateTime   @updatedAt\n  user             User       @relation(fields: [userId], references: [id])\n  barberShop       BarberShop @relation(fields: [barberShopId], references: [id])\n  barber           Barber?    @relation(fields: [barberId], references: [id])\n\n  @@index([barberShopId, createdAt])\n  @@map(\"review\")\n}\n\nmodel Service {\n  id           String     @id @default(uuid())\n  name         String\n  price        Int\n  duration     Int\n  barberShopId String\n  barberShop   BarberShop @relation(fields: [barberShopId], references: [id])\n  description  String\n  bookings     Booking[]\n  imageUrl     String\n\n  @@map(\"service\")\n}\n\nmodel Booking {\n  id           String     @id @default(uuid())\n  userId       String\n  serviceId    String\n  barberShopId String\n  barberId     String\n  date         DateTime\n  available    Boolean    @default(false)\n  createdAt    DateTime   @default(now())\n  updatedAt    DateTime   @updatedAt\n  user         User       @relation(fields: [userId], references: [id])\n  service      Service    @relation(fields: [serviceId], references: [id])\n  barberShop   BarberShop @relation(fields: [barberShopId], references: [id])\n  barber       Barber     @relation(fields: [barberId], references: [id])\n\n  @@map(\"booking\")\n}\n\nmodel Account {\n  id                String  @id @default(cuid())\n  userId            String\n  type              String\n  provider          String\n  providerAccountId String\n  refresh_token     String? @db.Text\n  access_token      String? @db.Text\n  expires_at        Int?\n  token_type        String?\n  scope             String?\n  id_token          String? @db.Text\n  session_state     String?\n\n  user User @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@unique([provider, providerAccountId])\n  @@map(\"account\")\n}\n\nmodel Session {\n  id           String   @id @default(cuid())\n  sessionToken String   @unique\n  userId       String\n  expires      DateTime\n  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@map(\"session\")\n}\n\nmodel VerificationToken {\n  identifier String\n  token      String   @unique\n  expires    DateTime\n\n  @@unique([identifier, token])\n  @@map(\"verification_token\")\n}\n",
   "inlineSchemaHash": "bde5a11e9a185014950f49ea51ba752559cdc930079ff3a282f97e73ff85c6e7",
-  "copyEngine": false
+  "copyEngine": true
 }
 config.dirname = '/'
 
