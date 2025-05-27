@@ -8,8 +8,9 @@ import {
   startOfWeek,
   subDays,
 } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
+import { enUS, ptBR } from 'date-fns/locale'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useLocale } from 'next-intl'
 import * as React from 'react'
 import {
   DayPicker,
@@ -28,6 +29,7 @@ function Calendar({
   classNames,
   showOutsideDays = true,
   selected,
+  locale,
   ...props
 }: CalendarProps) {
   const defaultDate = selected instanceof Date ? selected : new Date()
@@ -67,8 +69,8 @@ function Calendar({
         </Button>
 
         <span className="text-sm font-medium">
-          {format(start, 'd MMMM', { locale: ptBR })} -{' '}
-          {format(end, 'd MMMM', { locale: ptBR })}
+          {format(start, 'd MMMM', { locale })} -{' '}
+          {format(end, 'd MMMM', { locale })}
         </span>
 
         <Button
@@ -85,6 +87,7 @@ function Calendar({
         mode="single"
         month={weekBaseDate}
         selected={selected}
+        locale={locale}
         showOutsideDays={showOutsideDays}
         classNames={{
           ...classNames,

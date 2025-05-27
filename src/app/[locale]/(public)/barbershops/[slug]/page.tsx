@@ -1,6 +1,7 @@
 import { Metadata } from 'next'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
+import { getTranslations } from 'next-intl/server'
 
 import { auth } from '@/auth'
 import { Icons } from '@/components/icons'
@@ -37,6 +38,7 @@ export async function generateMetadata({
 export default async function BarberShopDetailsPage({
   params,
 }: BarberShopDetailsPageProps) {
+  const t = await getTranslations('BarberShopsPage')
   const barberShop = await db.barberShop.findUnique({
     where: {
       slug: params.slug,
@@ -78,9 +80,9 @@ export default async function BarberShopDetailsPage({
 
       <Tabs defaultValue="services">
         <TabsList className="sticky top-16 z-50 w-full">
-          <TabsTrigger value="services">Serviços</TabsTrigger>
-          <TabsTrigger value="details">Detalhes</TabsTrigger>
-          <TabsTrigger value="reviews">Avaliações</TabsTrigger>
+          <TabsTrigger value="services">{t('services')}</TabsTrigger>
+          <TabsTrigger value="details">{t('details')}</TabsTrigger>
+          <TabsTrigger value="reviews">{t('reviews')}</TabsTrigger>
           {/* <TabsTrigger value="reviews">Profissionais</TabsTrigger> */}
         </TabsList>
         <TabsContent value="services">

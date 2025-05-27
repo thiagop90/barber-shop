@@ -1,5 +1,6 @@
 import { format } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
+import { enUS, ptBR } from 'date-fns/locale'
+import { useLocale, useTranslations } from 'next-intl'
 
 import { Card, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
@@ -21,6 +22,10 @@ export function ScheduleSummary({
   selectedTime,
   barberShop,
 }: ServiceDetailsContentProps) {
+  const locale = useLocale()
+  const currentLocale = locale === 'pt' ? ptBR : enUS
+  const t = useTranslations('ServiceItem')
+
   return (
     <Card>
       <CardContent className="space-y-3 p-3">
@@ -32,22 +37,33 @@ export function ScheduleSummary({
         <Separator orientation="horizontal" />
 
         <div className="flex justify-between text-sm">
-          <h3 className="text-muted-foreground">Barbearia</h3>
+          <h3 className="text-muted-foreground">{t('barberShop')}</h3>
           <h3 className="font-medium">{barberShop.name}</h3>
         </div>
 
         <div className="flex justify-between text-sm">
-          <h3 className="text-muted-foreground">Data</h3>
+          <h3 className="text-muted-foreground">{t('date')}</h3>
           <h3 className="font-medium">
-            {format(date, "dd 'de' MMMM", {
-              locale: ptBR,
-            })}{' '}
-            <span>às {selectedTime}</span>
+            {locale === 'pt' ? (
+              <>
+                {format(date, "dd 'de' MMMM", {
+                  locale: currentLocale,
+                })}
+                <span> às {selectedTime}</span>
+              </>
+            ) : (
+              <>
+                {format(date, 'dd MMMM', {
+                  locale: currentLocale,
+                })}
+                <span>, {selectedTime}</span>
+              </>
+            )}
           </h3>
         </div>
 
         <div className="flex justify-between text-sm">
-          <h3 className="text-muted-foreground">Barbeiro</h3>
+          <h3 className="text-muted-foreground">{t('barber')}</h3>
           <h3 className="font-medium">{barber.name}</h3>
         </div>
       </CardContent>

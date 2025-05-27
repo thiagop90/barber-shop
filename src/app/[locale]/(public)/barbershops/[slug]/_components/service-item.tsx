@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { getTranslations } from 'next-intl/server'
 
 import { auth } from '@/auth'
 import { AccessAccount } from '@/components/access-account'
@@ -17,6 +18,7 @@ interface ServiceItemProps {
 }
 
 export async function ServiceItem({ barberShop, service }: ServiceItemProps) {
+  const t = await getTranslations('ServiceItem')
   const session = await auth()
   const userId = session?.user.id
   const servicePriceFormatted = formatCurrency(service.price)
@@ -53,7 +55,7 @@ export async function ServiceItem({ barberShop, service }: ServiceItemProps) {
               />
             ) : (
               <AccessAccount>
-                <Button size="sm">Reservar</Button>
+                <Button size="sm">{t('book')}</Button>
               </AccessAccount>
             )}
           </div>

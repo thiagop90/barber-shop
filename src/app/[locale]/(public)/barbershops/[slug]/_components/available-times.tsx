@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { format } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
+import { useTranslations } from 'next-intl'
 
 import type { OpeningHours } from '@/@types/opening-hours'
 import { Button } from '@/components/ui/button'
@@ -25,6 +24,8 @@ export function AvailableTimes({
   openingHours,
   barberId,
 }: TimeSlotsProps) {
+  const t = useTranslations('ServiceItem')
+
   const { data: timeSlots = [], isLoading } = useQuery({
     queryKey: ['timeSlots', date.toDateString(), barberId],
     queryFn: () => getTimeSlotsForDate(date, openingHours, barberId),
@@ -32,7 +33,7 @@ export function AvailableTimes({
 
   return (
     <div className="space-y-4">
-      <p className="text-sm">Horários disponíveis</p>
+      <p className="text-sm">{t('availableTimes')}</p>
       <ScrollArea>
         <div className="mb-2.5 flex gap-3">
           {isLoading ? (

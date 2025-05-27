@@ -3,8 +3,42 @@
     "home": "Início",
     "barbershops": "Barbearias"
   },
+  "AccountMenu": {
+    "accessAccount": "Acessar conta",
+    "continueWith": "Continuar com",
+    "hello": "Olá, {name}!",
+    "manageYourAppointments": "Gerencie seus agendamentos.",
+    "mySchedules": "Meus agendamentos",
+    "signOut": "Sair da conta",
+    "confirmSignOut": "Tem certeza que deseja sair da sua conta?",
+    "cancel": "Cancelar",
+    "logOut": "Sair",
+    "signIn": "Entrar"
+  },
   "HomePage": {
     "hello": "Olá, {name}!"
+  },
+  "BarberShopsPage": {
+    "barbershops": "Barbearias",
+    "search": "Busque por uma barbearia...",
+    "services": "Serviços",
+    "details": "Detalhes",
+    "reviews": "Avaliações",
+    "showing": "Exibindo",
+    "resultsFor": "resultados para"
+  },
+  "ServiceItem": {
+    "book": "Reservar",
+    "makeReservation": "Fazer reserva",
+    "selectAProfessional": "Selecione um profissional",
+    "warningCard": "Escolha um profissional para buscar os horários disponíveis para agendamento.",
+    "availableTimes": "Horários disponíveis",
+    "barberShop": "Barbearia",
+    "date": "Data",
+    "barber": "Barbeiro",
+    "cancel": "Cancelar",
+    "confirmReservation": "Confirmar reserva",
+    "saving": "Salvando..."
   },
   "propositions": {
     "": ""

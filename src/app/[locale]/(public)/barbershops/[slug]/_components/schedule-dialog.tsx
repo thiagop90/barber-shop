@@ -2,8 +2,9 @@
 
 import { useMutation } from '@tanstack/react-query'
 import { format, isBefore, setHours, setMinutes, startOfDay } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
+import { enUS, ptBR } from 'date-fns/locale'
 import { Clock } from 'lucide-react'
+import { useLocale, useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { toast } from 'sonner'
 
@@ -50,6 +51,9 @@ export function ScheduleDialog({
   barbers,
   userId,
 }: ScheduleDialogProps) {
+  const t = useTranslations('ServiceItem')
+  const locale = useLocale()
+  const currentLocale = locale === 'pt' ? ptBR : enUS
   const [isOpen, setIsOpen] = useState(false)
   const today = new Date()
   const isMobile = useMediaQuery('(max-width: 640px)')
@@ -89,7 +93,9 @@ export function ScheduleDialog({
   })
 
   function isDayUnavailable(date: Date): boolean {
-    const weekday = format(date, 'EEEE', { locale: ptBR }).toLowerCase()
+    const weekday = format(date, 'EEEE', {
+      locale: currentLocale,
+    }).toLowerCase()
     const { open, close } = openingHours[weekday as keyof OpeningHours] || {}
     const today = startOfDay(new Date())
 
@@ -107,12 +113,12 @@ export function ScheduleDialog({
               setSelectedTime(null)
             }
           }}
-          className="border-b px-4 pb-4 sm:pt-4"
-          locale={ptBR}
+          className="border-b px-4 pb-4"
+          locale={currentLocale}
           disabled={(date) => isDayUnavailable(date)}
         />
 
-        <div className="space-y-5 p-4">
+        <div className="space-y-5 p-4 sm:pb-0">
           <BarberSelector
             barbers={barbers}
             selectedBarber={selectedBarber}
@@ -134,8 +140,7 @@ export function ScheduleDialog({
             <div className="flex items-center gap-4 rounded-lg bg-card px-4 py-3">
               <Clock className="size-5 shrink-0 text-primary" />
               <p className="text-sm text-muted-foreground">
-                Escolha um profissional para buscar os horários disponíveis para
-                agendamento.
+                {t('warningCard')}
               </p>
             </div>
           )}
@@ -165,25 +170,25 @@ export function ScheduleDialog({
         }}
       >
         <DrawerTrigger asChild>
-          <Button size="sm">Reservar</Button>
+          <Button size="sm">{t('book')}</Button>
         </DrawerTrigger>
         <DrawerContent className="max-h-dvh">
           <DrawerHeader>
-            <DrawerTitle>Fazer reserva</DrawerTitle>
+            <DrawerTitle>{t('makeReservation')}</DrawerTitle>
           </DrawerHeader>
 
           <SchedulingContent />
 
           <DrawerFooter className="flex-row justify-between border-t">
             <DrawerClose asChild>
-              <Button variant="outline">Cancelar</Button>
+              <Button variant="outline">{t('cancel')}</Button>
             </DrawerClose>
 
             <Button
               onClick={() => createBookingFn()}
               disabled={isPending || !selectedBarber || !selectedTime}
             >
-              {isPending ? 'Salvando...' : 'Confirmar reserva'}
+              {isPending ? t('saving') : t('confirmReservation')}
             </Button>
           </DrawerFooter>
         </DrawerContent>
@@ -200,25 +205,25 @@ export function ScheduleDialog({
       }}
     >
       <DialogTrigger asChild>
-        <Button size="sm">Reservar</Button>
+        <Button size="sm">{t('book')}</Button>
       </DialogTrigger>
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Fazer reserva</DialogTitle>
+          <DialogTitle>{t('makeReservation')}</DialogTitle>
         </DialogHeader>
 
         <SchedulingContent />
 
         <DialogFooter className="justify-between border-t p-4">
           <DialogClose asChild>
-            <Button variant="outline">Cancelar</Button>
+            <Button variant="outline">{t('cancel')}</Button>
           </DialogClose>
           <Button
             onClick={() => createBookingFn()}
             disabled={isPending || !selectedBarber || !selectedTime}
           >
-            {isPending ? 'Salvando...' : 'Confirmar reserva'}
+            {isPending ? t('saving') : t('confirmReservation')}
           </Button>
         </DialogFooter>
       </DialogContent>

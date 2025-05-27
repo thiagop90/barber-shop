@@ -1,8 +1,8 @@
 'use client'
 
-import { Loader2 } from 'lucide-react'
 import { OAuthProviderId } from 'next-auth/providers'
 import { signIn } from 'next-auth/react'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 import { Icons } from '@/components/icons'
@@ -17,7 +17,6 @@ import {
 import {
   Drawer,
   DrawerContent,
-  DrawerDescription,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -25,6 +24,7 @@ import {
 import { useMediaQuery } from '@/lib/hooks/use-media-query'
 
 export function AccessAccount({ children }: { children: React.ReactNode }) {
+  const t = useTranslations('AccountMenu')
   const isMobile = useMediaQuery('(max-width: 640px)')
   const [isDismissible, setIsDismissible] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
@@ -48,7 +48,7 @@ export function AccessAccount({ children }: { children: React.ReactNode }) {
           <div className="absolute left-4 top-1/2 -translate-y-1/2">
             {isLoading ? <Icons.spinner /> : <Icons.google />}
           </div>
-          Continuar com Google
+          {t('continueWith')} Google
         </Button>
         <Button
           variant="outline"
@@ -59,7 +59,7 @@ export function AccessAccount({ children }: { children: React.ReactNode }) {
           <div className="absolute left-4 top-1/2 -translate-y-1/2">
             {isLoading ? <Icons.spinner /> : <Icons.facebook />}
           </div>
-          Continuar com Facebook
+          {t('continueWith')} Facebook
         </Button>
       </div>
     )
@@ -83,7 +83,7 @@ export function AccessAccount({ children }: { children: React.ReactNode }) {
 
         <DrawerContent>
           <DrawerHeader>
-            <DrawerTitle>Acessar conta</DrawerTitle>
+            <DrawerTitle>{t('accessAccount')}</DrawerTitle>
           </DrawerHeader>
 
           <SignInButton />
@@ -98,7 +98,7 @@ export function AccessAccount({ children }: { children: React.ReactNode }) {
 
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Acessar conta</DialogTitle>
+          <DialogTitle>{t('accessAccount')}</DialogTitle>
         </DialogHeader>
 
         <SignInButton />

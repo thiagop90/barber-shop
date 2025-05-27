@@ -1,5 +1,6 @@
 import { CalendarDays, LogOut } from 'lucide-react'
 import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
 
 import { auth, signOut } from '@/auth'
 import { cn } from '@/lib/utils'
@@ -21,6 +22,7 @@ import { Button, buttonVariants } from './ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from './ui/popover'
 
 export async function AccountMenu() {
+  const t = await getTranslations('AccountMenu')
   const session = await auth()
   const user = session?.user
 
@@ -39,8 +41,8 @@ export async function AccountMenu() {
                 </AvatarFallback>
                 <AvatarImage src={user?.image ?? ''} />
               </Avatar>
-              <span>{user.name?.split(' ')[0]}</span>&nbsp;
-              <span className="hidden min-[500px]:block">
+              <span translate="no">{user.name?.split(' ')[0]}</span>&nbsp;
+              <span translate="no" className="hidden min-[500px]:block">
                 {user.name?.split(' ')[1]}
               </span>
             </Button>
@@ -48,9 +50,13 @@ export async function AccountMenu() {
 
           <PopoverContent align="end" sideOffset={8}>
             <div className="mb-4">
-              <p>Olá, {user.name?.split(' ')[0]}!</p>
+              <p>
+                {t('hello', {
+                  name: user.name?.split(' ')[0] ?? '',
+                })}
+              </p>
               <p className="text-sm text-muted-foreground">
-                Gerencie seus agendamentos.
+                {t('manageYourAppointments')}
               </p>
             </div>
 
@@ -62,7 +68,7 @@ export async function AccountMenu() {
                 )}
                 href="/bookings"
               >
-                Meus agendametos
+                {t('mySchedules')}
                 <CalendarDays className="h-4 w-4" strokeWidth={1.75} />
               </Link>
 
@@ -72,20 +78,20 @@ export async function AccountMenu() {
                     variant="outline"
                     className="w-full  justify-between text-red-400 hover:text-red-400"
                   >
-                    Sair da conta
+                    {t('signOut')}
                     <LogOut className="h-4 w-4" strokeWidth={1.75} />
                   </Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent className="w-[90%]">
                   <AlertDialogHeader>
-                    <AlertDialogTitle>Sair da conta</AlertDialogTitle>
+                    <AlertDialogTitle>{t('signOut')}</AlertDialogTitle>
                     <AlertDialogDescription>
-                      Tem certeza que deseja sair da sua conta?
+                      {t('confirmSignOut')}
                     </AlertDialogDescription>
                   </AlertDialogHeader>
 
                   <AlertDialogFooter>
-                    <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                    <AlertDialogCancel>{t('cancel')}</AlertDialogCancel>
 
                     <form
                       action={async () => {
@@ -95,7 +101,7 @@ export async function AccountMenu() {
                       className="w-full"
                     >
                       <AlertDialogAction asChild>
-                        <button type="submit">Sair</button>
+                        <button type="submit">{t('logOut')}</button>
                       </AlertDialogAction>
                     </form>
                   </AlertDialogFooter>
@@ -106,7 +112,7 @@ export async function AccountMenu() {
         </Popover>
       ) : (
         <AccessAccount>
-          <Button>Entrar</Button>
+          <Button>{t('signIn')}</Button>
         </AccessAccount>
       )}
     </>

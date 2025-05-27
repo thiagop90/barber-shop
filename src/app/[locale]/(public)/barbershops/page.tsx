@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation'
+import { getTranslations } from 'next-intl/server'
 
 import { BarberShopItem } from '@/components/barbershop-item'
 import { Search } from '@/components/search'
@@ -17,6 +18,7 @@ export const metadata = {
 export default async function BarberShopsPage({
   searchParams,
 }: BarberShopsPageProps) {
+  const t = await getTranslations('BarberShopsPage')
   const barbershops = await db.barberShop.findMany({
     where: {
       name: {
@@ -29,7 +31,7 @@ export default async function BarberShopsPage({
 
   return (
     <div className="space-y-5 px-5 py-8 sm:px-6">
-      <h1 className="text-3xl font-bold tracking-tight">Barbearias</h1>
+      <h1 className="text-3xl font-bold tracking-tight">{t('barbershops')}</h1>
       <Search
         defaultValues={{
           search: searchParams.search ?? '',
@@ -39,7 +41,7 @@ export default async function BarberShopsPage({
       <div className="space-y-3">
         {searchParams.search && (
           <h3 className="text-xs font-bold uppercase text-muted-foreground">
-            Exibindo {barbershops.length} resultados para &quot;
+            {t('showing')} {barbershops.length} {t('resultsFor')} &quot;
             {searchParams.search}&quot;
           </h3>
         )}

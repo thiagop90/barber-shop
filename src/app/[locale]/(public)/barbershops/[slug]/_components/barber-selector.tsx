@@ -1,6 +1,4 @@
-'use client'
-
-import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -18,9 +16,11 @@ export function BarberSelector({
   selectedBarber,
   onSelectBarber,
 }: BarberSelectorProps) {
+  const t = useTranslations('ServiceItem')
+
   return (
     <div className="space-y-4">
-      <p className="text-sm">Selecione um profissional</p>
+      <p className="text-sm">{t('selectAProfessional')}</p>
       <div className="flex gap-5">
         {barbers.map((barber) => (
           <button
@@ -28,12 +28,14 @@ export function BarberSelector({
             onClick={() => onSelectBarber(barber)}
             className={cn(
               'flex flex-col items-center gap-4 text-center',
-              selectedBarber?.id === barber.id ? 'pointer-events-none' : '',
+              selectedBarber?.id === barber.id
+                ? 'pointer-events-none text-primary'
+                : 'text-muted-foreground',
             )}
           >
             <Avatar className="overflow-visible">
               <AvatarFallback>
-                <Skeleton className="size-full" />
+                <Skeleton className="size-full rounded-full" />
               </AvatarFallback>
               <AvatarImage
                 src={barber.imageUrl ?? ''}
@@ -46,16 +48,7 @@ export function BarberSelector({
               />
             </Avatar>
 
-            <span
-              className={cn(
-                'text-xs',
-                selectedBarber?.id === barber.id
-                  ? 'text-primary'
-                  : 'text-muted-foreground',
-              )}
-            >
-              {barber.name}
-            </span>
+            <span className="text-xs">{barber.name}</span>
           </button>
         ))}
       </div>

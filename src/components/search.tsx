@@ -2,32 +2,27 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { SearchIcon } from 'lucide-react'
-import { useRouter } from 'next/navigation'
+import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+
+import { useRouter } from '@/i18n/routing'
 
 import { Form, FormControl, FormField, FormItem, FormMessage } from './ui/form'
 import { Input } from './ui/input'
 
-const formSchema = z.object({
-  search: z
-    .string({ required_error: 'Campo obrigatório.' })
-    .trim()
-    .min(1, { message: 'Campo obrigatório.' }),
-})
-
 interface SearchProps {
-  defaultValues?: z.infer<typeof formSchema>
+  defaultValues?: { search: string }
 }
 
 export function Search({ defaultValues }: SearchProps) {
+  const t = useTranslations('BarberShopsPage')
   const router = useRouter()
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm({
     defaultValues,
   })
 
-  function handleSubmit(data: z.infer<typeof formSchema>) {
+  function handleSubmit(data: { search: string }) {
     router.push(`/barbershops?search=${data.search}`)
   }
 
@@ -43,7 +38,7 @@ export function Search({ defaultValues }: SearchProps) {
                 <div className="relative flex items-center">
                   <Input
                     className="h-12 bg-card pl-10"
-                    placeholder="Busque por uma barbearia..."
+                    placeholder={t('search')}
                     {...field}
                   />
                   <SearchIcon className="absolute left-3 h-5 w-5 text-primary" />
