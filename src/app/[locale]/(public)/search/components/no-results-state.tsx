@@ -1,4 +1,4 @@
-import { MapPin, SearchX, Store } from 'lucide-react'
+import { SearchX } from 'lucide-react'
 import { getTranslations } from 'next-intl/server'
 
 interface NoResultsStateProps {
@@ -26,45 +26,13 @@ export async function NoResultsState({ query }: NoResultsStateProps) {
         </div>
       </div>
 
-      <div className="mb-6 space-y-3">
+      <div className="space-y-2">
         <h3 className="text-lg font-semibold text-card-foreground">
           {t('noResultsFound')}
         </h3>
         <p className="max-w-sm text-sm text-muted-foreground">
           {t('noResultsDescription', { query: `"${query}"` })}
         </p>
-      </div>
-
-      <div className="max-w-md space-y-4">
-        <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-          {t('suggestions')}
-        </p>
-
-        <div className="grid gap-3 text-left">
-          <div className="flex items-start gap-3 rounded-lg bg-muted/30 p-4">
-            <Store className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
-            <div className="space-y-1">
-              <p className="text-sm font-medium text-card-foreground">
-                {t('tryDifferentName')}
-              </p>
-              <p className="text-xs text-muted-foreground">
-                {t('tryDifferentNameDescription')}
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-3 rounded-lg bg-muted/30 p-4">
-            <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
-            <div className="space-y-1">
-              <p className="text-sm font-medium text-card-foreground">
-                {t('searchByLocation')}
-              </p>
-              <p className="text-xs text-muted-foreground">
-                {t('searchByLocationDescription')}
-              </p>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   )

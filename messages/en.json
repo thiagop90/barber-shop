@@ -30,12 +30,7 @@
     "findEstablishment": "Find a barbershop",
     "searchByNameOrCity": "Search by name or location",
     "noResultsFound": "No results found",
-    "noResultsDescription": "We couldn't find any barbershops for {query}",
-    "suggestions": "Suggestions:",
-    "tryDifferentName": "Try a different name",
-    "tryDifferentNameDescription": "Check spelling or use more general terms",
-    "searchByLocation": "Search by location",
-    "searchByLocationDescription": "Try searching by neighborhood, city, or area"
+    "noResultsDescription": "We couldn't find any barbershops for {query}"
   },
   "BarberShopsPage": {
     "barbershops": "Barbershops",

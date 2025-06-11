@@ -25,7 +25,7 @@ export function BarberShopItem({ barbershop }: BarberShopItemProps) {
 
   return (
     <Card className="rounded-2xl">
-      <CardContent className="relative grid h-full grid-cols-2 gap-4 p-3 min-[500px]:flex min-[500px]:flex-col">
+      <CardContent className="relative flex h-full flex-col gap-4 p-3">
         <div className="relative aspect-square overflow-hidden rounded-md border">
           <Badge className="absolute left-1 top-1 z-10 gap-1 bg-card/90 px-1.5 backdrop-blur-sm hover:bg-card/75">
             <Star className="h-3 w-3 fill-primary text-primary" />
@@ -42,10 +42,10 @@ export function BarberShopItem({ barbershop }: BarberShopItemProps) {
           />
         </div>
 
-        <div className="flex flex-1 flex-col min-[500px]:gap-4">
+        <div className="flex flex-1 flex-col gap-4">
           <div className="flex-1 space-y-0.5 text-pretty">
             <h2 className="font-semibold">{barbershop.name}</h2>
-            <p className="text-sm text-muted-foreground min-[500px]:line-clamp-2 min-[500px]:text-xs">
+            <p className="line-clamp-2 text-xs text-muted-foreground">
               {barbershop.address}
             </p>
           </div>

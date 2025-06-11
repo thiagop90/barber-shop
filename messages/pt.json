@@ -30,12 +30,7 @@
     "findEstablishment": "Encontre um estabelecimento",
     "searchByNameOrCity": "Pesquise pelo nome ou localização do estabelecimento",
     "noResultsFound": "Nenhum resultado encontrado",
-    "noResultsDescription": "Não encontramos nenhuma barbearia para {query}",
-    "suggestions": "Sugestões:",
-    "tryDifferentName": "Tente um nome diferente",
-    "tryDifferentNameDescription": "Verifique a ortografia ou use termos mais gerais",
-    "searchByLocation": "Busque por localização", 
-    "searchByLocationDescription": "Tente buscar por bairro, cidade ou região"
+    "noResultsDescription": "Não encontramos nenhuma barbearia para {query}"
   },
   "BarberShopsPage": {
     "barbershops": "Barbearias",
