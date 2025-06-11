@@ -1,4 +1,6 @@
 import {
+  ArrowLeft,
+  ArrowRight,
   CalendarDays,
   type LucideProps,
   MapPin,
@@ -15,6 +17,12 @@ export const Icons = {
       className={cn('size-4 text-primary', className)}
       {...props}
     />
+  ),
+  arrowRight: ({ className, ...props }: LucideProps) => (
+    <ArrowRight className={cn('size-4 shrink-0', className)} {...props} />
+  ),
+  arrowLeft: ({ className, ...props }: LucideProps) => (
+    <ArrowLeft className={cn('size-4 shrink-0', className)} {...props} />
   ),
   mapPin: ({ className, ...props }: LucideProps) => (
     <MapPin className={cn('size-5 text-primary', className)} {...props} />
