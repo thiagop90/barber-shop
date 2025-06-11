@@ -1,0 +1,63 @@
+{
+  "Header": {
+    "home": "Início",
+    "search": "Buscar",
+    "appointments": "Agendamentos",
+    "profile": "Pefil",
+    "myAppointments": "Meus Agendamentos"
+  },
+  "AccountMenu": {
+    "accessAccount": "Acessar conta",
+    "continueWith": "Continuar com",
+    "hello": "Olá, {name}!",
+    "manageYourAppointments": "Gerencie seus agendamentos.",
+    "mySchedules": "Meus agendamentos",
+    "signOut": "Sair da conta",
+    "confirmSignOut": "Tem certeza que deseja sair da sua conta?",
+    "cancel": "Cancelar",
+    "logOut": "Sair",
+    "signIn": "Entrar"
+  },
+  "HomePage": {
+    "hello": "Olá, {name}!",
+    "welcomeVisitor": "Bem vindo, visitante!"
+  },
+  "SearchPage": {
+    "search": "Busque por uma barbearia...",
+    "showing": "Exibindo",
+    "resultsFor": "resultados para",
+    "clear": "Limpar",
+    "findEstablishment": "Encontre um estabelecimento",
+    "searchByNameOrCity": "Pesquise pelo nome ou localização do estabelecimento",
+    "noResultsFound": "Nenhum resultado encontrado",
+    "noResultsDescription": "Não encontramos nenhuma barbearia para {query}",
+    "suggestions": "Sugestões:",
+    "tryDifferentName": "Tente um nome diferente",
+    "tryDifferentNameDescription": "Verifique a ortografia ou use termos mais gerais",
+    "searchByLocation": "Busque por localização", 
+    "searchByLocationDescription": "Tente buscar por bairro, cidade ou região"
+  },
+  "BarberShopsPage": {
+    "barbershops": "Barbearias",
+    "services": "Serviços",
+    "details": "Detalhes",
+    "reviews": "Avaliações",
+    "bookNow": "Reservar agora"
+  },
+  "ServiceItem": {
+    "schedule": "Agendar",
+    "makeReservation": "Fazer reserva",
+    "selectAProfessional": "Selecione um profissional",
+    "warningCard": "Escolha um profissional para buscar os horários disponíveis para agendamento.",
+    "availableTimes": "Horários disponíveis",
+    "barberShop": "Barbearia",
+    "date": "Data",
+    "barber": "Barbeiro",
+    "cancel": "Cancelar",
+    "confirmReservation": "Confirmar reserva",
+    "saving": "Salvando..."
+  },
+  "propositions": {
+    "": ""
+  }
+}

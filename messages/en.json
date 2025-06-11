@@ -1,0 +1,63 @@
+{
+  "Header": {
+    "home": "Home",
+    "search": "Search",
+    "appointments": "Appointments",
+    "profile": "Profile",
+    "myAppointments": "My Appointments"
+  },
+  "AccountMenu": {
+    "accessAccount": "Access account",
+    "continueWith": "Continue with",
+    "hello": "Hello, {name}!",
+    "manageYourAppointments": "Manage your appointments.",
+    "mySchedules": "My schedules",
+    "signOut": "Sign out of account",
+    "confirmSignOut": "Are you sure you want to log out of your account?",
+    "cancel": "Cancel",
+    "logOut": "Log out",
+    "signIn": "Sign in"
+  },
+  "HomePage": {
+    "hello": "Hello, {name}!",
+    "welcomeVisitor": "Welcome, visitor!"
+  },
+  "SearchPage": {
+    "search": "Search for a barbershop...",
+    "showing": "Showing",
+    "resultsFor": "results for",
+    "clear": "Clear",
+    "findEstablishment": "Find a barbershop",
+    "searchByNameOrCity": "Search by name or location",
+    "noResultsFound": "No results found",
+    "noResultsDescription": "We couldn't find any barbershops for {query}",
+    "suggestions": "Suggestions:",
+    "tryDifferentName": "Try a different name",
+    "tryDifferentNameDescription": "Check spelling or use more general terms",
+    "searchByLocation": "Search by location",
+    "searchByLocationDescription": "Try searching by neighborhood, city, or area"
+  },
+  "BarberShopsPage": {
+    "barbershops": "Barbershops",
+    "services": "Services",
+    "details": "Details",
+    "reviews": "Reviews",
+    "bookNow": "Book now"
+  },
+  "ServiceItem": {
+    "schedule": "Schedule",
+    "makeReservation": "Make reservation",
+    "selectAProfessional": "Select a professional",
+    "warningCard": "Choose a professional to find available times for scheduling.",
+    "availableTimes": "Available times",
+    "barberShop": "Barbershop",
+    "date": "Date",
+    "barber": "Barber",
+    "cancel": "Cancel",
+    "confirmReservation": "Confirm reservation",
+    "saving": "Saving..."
+  },
+  "propositions": {
+    "": ""
+  }
+}

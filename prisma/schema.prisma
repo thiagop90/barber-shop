@@ -1,0 +1,152 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum UserRole {
+  ADMIN
+  USER
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  role          UserRole  @default(USER)
+  image         String?
+  phone         String?
+  accounts      Account[]
+  sessions      Session[]
+  bookings      Booking[]
+  reviews       Review[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@map("user")
+}
+
+model Barber {
+  id           String     @id @default(uuid())
+  name         String
+  barberShopId String
+  barberShop   BarberShop @relation(fields: [barberShopId], references: [id])
+  imageUrl     String?
+  bookings     Booking[]
+  reviews      Review[]
+
+  @@map("barber")
+}
+
+model BarberShop {
+  id           String    @id @default(uuid())
+  name         String
+  slug         String    @unique
+  phone        String
+  address      String
+  imageUrl     String
+  openingHours Json?
+  services     Service[]
+  bookings     Booking[]
+  barbers      Barber[]
+  reviews      Review[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@map("barbershop")
+}
+
+model Review {
+  id               String     @id @default(uuid())
+  userId           String
+  barberShopId     String
+  barberId         String?
+  barberShopRating Int
+  barberRating     Int
+  comment          String?
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+  user             User       @relation(fields: [userId], references: [id])
+  barberShop       BarberShop @relation(fields: [barberShopId], references: [id])
+  barber           Barber?    @relation(fields: [barberId], references: [id])
+
+  @@index([barberShopId, createdAt])
+  @@map("review")
+}
+
+model Service {
+  id           String     @id @default(uuid())
+  name         String
+  price        Int
+  duration     Int
+  barberShopId String
+  barberShop   BarberShop @relation(fields: [barberShopId], references: [id])
+  description  String
+  bookings     Booking[]
+  imageUrl     String
+
+  @@map("service")
+}
+
+model Booking {
+  id           String     @id @default(uuid())
+  userId       String
+  serviceId    String
+  barberShopId String
+  barberId     String
+  date         DateTime
+  available    Boolean    @default(false)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  user         User       @relation(fields: [userId], references: [id])
+  service      Service    @relation(fields: [serviceId], references: [id])
+  barberShop   BarberShop @relation(fields: [barberShopId], references: [id])
+  barber       Barber     @relation(fields: [barberId], references: [id])
+
+  @@map("booking")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("account")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("session")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_token")
+}
